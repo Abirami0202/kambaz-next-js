@@ -1,7 +1,6 @@
 "use client";
 
 import AccountSidebar from "../Sidebar";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
