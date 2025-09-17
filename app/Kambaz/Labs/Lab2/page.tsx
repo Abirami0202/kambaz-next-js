@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import Link from "next/link";
 
 export default function Lab2() {
-  const alertRef = useRef<HTMLButtonElement>(null);
 
   function showAlert() {
     alert("Life is Good!");
@@ -98,7 +97,7 @@ export default function Lab2() {
       </form>
       <div>
         <h4>Labs Navigation</h4>
-        <a href="/Kambaz/Labs/Lab1">Lab 1</a> | <a href="/Kambaz/Labs/Lab2">Lab 2</a> | <a href="/">Kambaz Application</a>
+        <Link href="/Kambaz/Labs/Lab1">Lab 1</Link> | <Link href="/Kambaz/Labs/Lab2">Lab 2</Link> | <Link href="/">Kambaz Application</Link>
       </div>
     </div>
   );

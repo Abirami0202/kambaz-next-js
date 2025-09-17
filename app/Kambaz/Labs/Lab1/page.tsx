@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Lab1() {
   return (
@@ -12,7 +13,7 @@ export default function Lab1() {
       {/* Links */}
       <p>
         <Link href="/Labs">All Labs</Link> | <Link href="/Kambaz">Kambaz App</Link> |{" "}
-        <a id="wd-github" href="https://github.com/yourusername/kambaz-next-js" target="_blank">Source Code (GitHub)</a>
+        <a id="wd-github" href="https://github.com/Abirami0202/kambaz-next-js.git" target="_blank">Source Code (GitHub)</a>
       </p>
 
       {/* Heading Tags */}
@@ -91,11 +92,11 @@ export default function Lab1() {
         <h4>Image Tag</h4>
         Loading an image from the internet:
         <br />
-        <img id="wd-starship" width="300px" src="/starship.jpg" alt="Starship" />
+        <Image id="wd-starship" width={300} height={200} src="/starship.jpg" alt="Starship" />
         <br />
         Loading a local image:
         <br />
-        <img id="wd-teslabot" width="300px" src="/teslabot.jpg" height="200px" alt="Teslabot"/>
+        <Image id="wd-teslabot" width={300} height={200} src="/teslabot.jpg" alt="Teslabot"/>
       </div>
 
       {/* Navigation & Anchor */}
