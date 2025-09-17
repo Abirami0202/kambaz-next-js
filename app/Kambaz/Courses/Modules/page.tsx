@@ -10,11 +10,11 @@ export default function ModulesList() {
     <div style={{ padding: "1rem", color: "black" }}>
       <h1 style={{ fontWeight: "bold", fontSize: "2rem" }}>Modules</h1>
       <ul style={{ listStyleType: "none", padding: 0 }}>
-        {modules.map((mod) => (
-          <li key={mod.id} style={{ marginBottom: "1rem", cursor: "pointer" }}>
-            <Link href={`/Kambaz/Courses/Modules/${mod.id}`}>
-              <h2 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{mod.title}</h2>
-              <p style={{ fontSize: "1rem" }}>{mod.description}</p>
+        {modules.map((modItem) => (
+          <li key={modItem.id} style={{ marginBottom: "1rem", cursor: "pointer" }}>
+            <Link href={`/Kambaz/Courses/Modules/${modItem.id}`}>
+              <h2 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{modItem.title}</h2>
+              <p style={{ fontSize: "1rem" }}>{modItem.description}</p>
             </Link>
           </li>
         ))}
