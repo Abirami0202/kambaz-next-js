@@ -1,35 +1,54 @@
+// app/Kambaz/Labs/page.tsx
 import Link from "next/link";
 
 export default function LabsPage() {
   return (
     <div style={{ padding: "1rem" }}>
       <h1>Labs</h1>
-      <p>Abirami, Web development</p>
+      
+      {/* Your full name and section - as required by assignment */}
+      <h3>Name: ABIRAMI</h3>
+      <h3>Section: WD</h3>
+      
       <ul>
         <li>
-          <Link href="/Kambaz/Labs/Lab1">Lab 1</Link>
+          <Link href="/Kambaz/Labs/Lab1" id="wd-lab1-link">
+            Lab 1: HTML Examples
+          </Link>
         </li>
         <li>
-          <Link href="/Kambaz/Labs/Lab2">Lab 2</Link>
+          <Link href="/Kambaz/Labs/Lab2" id="wd-lab2-link">
+            Lab 2: Forms
+          </Link>
+        </li>
+        <li>
+          <Link href="/Kambaz/Labs/Lab3" id="wd-lab3-link">
+            Lab 3: CSS Basics
+          </Link>
+        </li>
+        <li>
+          <Link href="/Kambaz/Labs/Lab4" id="wd-lab4-link">
+            Lab 4: Bootstrap & Components
+          </Link>
         </li>
       </ul>
 
       <hr />
 
       <p>
-        <Link href="/">Back to Kambaz Home</Link>
+        <Link href="/" id="wd-kambaz-link">Back to Kambaz Home</Link>
       </p>
 
       <p>Source code repositories:</p>
       <ul>
         <li>
-          <a href="https://github.com/Abirami0202/kambaz-next-js.git" target="_blank" rel="noopener noreferrer">
-            Repository 1
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/Abirami0202/kambaz-next-js.git" target="_blank" rel="noopener noreferrer">
-            Repository 2
+          <a 
+            id="wd-github" 
+            href="https://github.com/Abirami0202/kambaz-next-js" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            GitHub Repository
           </a>
         </li>
       </ul>

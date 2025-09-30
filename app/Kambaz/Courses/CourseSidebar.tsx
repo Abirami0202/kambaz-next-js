@@ -1,50 +1,55 @@
-'use client'
+// app/Kambaz/Courses/CourseSidebar.tsx
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function CourseSidebar() {
   const pathname = usePathname();
+  
   const navItems = [
-    { label: "Home", href: "/Kambaz/Courses/Home" },
-    { label: "Modules", href: "/Kambaz/Courses/Modules" },
-    { label: "Piazza", href: "/Kambaz/Courses/Piazza" },
-    { label: "Zoom", href: "/Kambaz/Courses/Zoom" },
-    { label: "Quizzes", href: "/Kambaz/Courses/Quizzes" },
-    { label: "Assignments", href: "/Kambaz/Courses/Assignments" },
-    { label: "Grades", href: "/Kambaz/Courses/Grades" },
+    { label: "Home", href: "/Kambaz/Courses/Home", id: "wd-course-home-link" },
+    { label: "Modules", href: "/Kambaz/Courses/Modules", id: "wd-course-modules-link" },
+    { label: "Piazza", href: "/Kambaz/Courses/Piazza", id: "wd-course-piazza-link" },
+    { label: "Zoom", href: "/Kambaz/Courses/Zoom", id: "wd-course-zoom-link" },
+    { label: "Assignments", href: "/Kambaz/Courses/Assignments", id: "wd-course-assignments-link" },
+    { label: "Quizzes", href: "/Kambaz/Courses/Quizzes", id: "wd-course-quizzes-link" },
+    { label: "Grades", href: "/Kambaz/Courses/Grades", id: "wd-course-grades-link" },
+    { label: "People", href: "/Kambaz/Courses/People", id: "wd-course-people-link" },
   ];
 
   return (
-    <nav
+    <div
+      id="wd-courses-navigation"
       style={{
-        width: 200,
+        width: "200px",
+        backgroundColor: "white",
+        minHeight: "100vh",
         borderRight: "1px solid #ddd",
-        padding: "1rem",
-        height: "100vh",
-        boxSizing: "border-box",
-        backgroundColor: "#f0f0f0",
       }}
     >
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {navItems.map(({ label, href }) => (
-          <li key={label} style={{ marginBottom: "0.75rem" }}>
-            <Link
-              href={href}
-              style={{
-                display: "block",
-                padding: "0.5rem",
-                backgroundColor: pathname === href ? "#ddd" : "transparent",
-                fontWeight: "bold",
-                color: "#000",
-                textDecoration: "none",
-              }}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      {navItems.map(({ label, href, id }) => {
+        const isActive = pathname === href || pathname.includes(label);
+        
+        return (
+          <Link
+            key={href}
+            href={href}
+            id={id}
+            style={{
+              display: "block",
+              padding: "0.75rem 1rem",
+              color: "red",
+              textDecoration: "none",
+              backgroundColor: "white",
+              borderLeft: isActive ? "3px solid black" : "3px solid transparent",
+              fontWeight: isActive ? "bold" : "normal",
+            }}
+          >
+            {label}
+          </Link>
+        );
+      })}
+    </div>
   );
 }

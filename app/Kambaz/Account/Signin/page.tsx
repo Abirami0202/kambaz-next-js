@@ -1,13 +1,16 @@
+// app/Kambaz/Account/Signin/page.tsx
 "use client";
 
-import AccountSidebar from "../Sidebar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import Link from "next/link";
+import AccountSidebar from "../Sidebar";
 
 export default function Signin() {
   const router = useRouter();
-  const [username, setUsername] = useState("abi");
-  const [password, setPassword] = useState("123456");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,58 +20,36 @@ export default function Signin() {
   return (
     <div style={{ display: "flex" }}>
       <AccountSidebar />
-      <div style={{ flex: 1, padding: "2rem", color: "#000" }}>
-        <h3 style={{ fontWeight: "bold", fontSize: "1.8rem", marginBottom: "1rem" }}>
-          Sign in
-        </h3>
-        <form onSubmit={handleSignin}>
-          <input
+      <div id="wd-signin-screen" style={{ padding: "2rem", maxWidth: "400px" }}>
+        <h1>Sign in</h1>
+        <Form onSubmit={handleSignin}>
+          <Form.Control
             id="wd-username"
-            type="text"
+            placeholder="username"
+            className="mb-2"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              fontSize: "1rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              color: "#000",
-            }}
           />
-          <input
+          <Form.Control
             id="wd-password"
+            placeholder="password"
             type="password"
+            className="mb-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              fontSize: "1rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              color: "#000",
-            }}
           />
-          <button
+          <Button
             id="wd-signin-btn"
             type="submit"
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              backgroundColor: "#0070f3",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
+            variant="primary"
+            className="w-100 mb-2"
           >
             Sign in
-          </button>
-        </form>
+          </Button>
+          <Link id="wd-signup-link" href="/Kambaz/Account/Signup">
+            Sign up
+          </Link>
+        </Form>
       </div>
     </div>
   );

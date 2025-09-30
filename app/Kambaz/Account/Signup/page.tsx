@@ -1,18 +1,20 @@
+// app/Kambaz/Account/Signup/page.tsx
 "use client";
 
-import AccountSidebar from "../Sidebar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import Link from "next/link";
+import AccountSidebar from "../Sidebar";
 
 export default function Signup() {
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifyPassword, setVerifyPassword] = useState("");
 
-  const [username, setUsername] = useState("newuser");
-  const [password, setPassword] = useState("password123");
-  const [verifyPassword, setVerifyPassword] = useState("password123");
-
-  const handleSignup = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSignup = (e: React.FormEvent) => {
+    e.preventDefault();
     if (password !== verifyPassword) {
       alert("Passwords do not match!");
       return;
@@ -23,94 +25,44 @@ export default function Signup() {
   return (
     <div style={{ display: "flex" }}>
       <AccountSidebar />
-      <div style={{ flex: 1, paddingLeft: 20, color: "#000" }}>
-        <h3 style={{ fontWeight: "bold", fontSize: "1.8rem", marginBottom: "1rem" }}>
-          Sign up
-        </h3>
-        <form onSubmit={handleSignup}>
-          <label htmlFor="wd-signup-username" style={{ fontSize: "1rem", fontWeight: "bold" }}>
-            Username
-          </label>
-          <br />
-          <input
-            type="text"
-            id="wd-signup-username"
+      <div id="wd-signup-screen" style={{ padding: "2rem", maxWidth: "400px" }}>
+        <h1>Sign up</h1>
+        <Form onSubmit={handleSignup}>
+          <Form.Control
+            id="wd-username"
+            placeholder="username"
+            className="mb-2"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              fontSize: "1rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              color: "#000"
-            }}
           />
-          <br />
-
-          <label htmlFor="wd-signup-password" style={{ fontSize: "1rem", fontWeight: "bold" }}>
-            Password
-          </label>
-          <br />
-          <input
+          <Form.Control
+            id="wd-password"
+            placeholder="password"
             type="password"
-            id="wd-signup-password"
+            className="mb-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              fontSize: "1rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              color: "#000"
-            }}
           />
-          <br />
-
-          <label
-            htmlFor="wd-signup-verify-password"
-            style={{ fontSize: "1rem", fontWeight: "bold" }}
-          >
-            Verify Password
-          </label>
-          <br />
-          <input
+          <Form.Control
+            id="wd-verify-password"
+            placeholder="verify password"
             type="password"
-            id="wd-signup-verify-password"
+            className="mb-2"
             value={verifyPassword}
             onChange={(e) => setVerifyPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              fontSize: "1rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              color: "#000"
-            }}
           />
-          <br />
-
-          <button
+          <Button
             id="wd-signup-btn"
             type="submit"
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              backgroundColor: "#0070f3",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
+            variant="primary"
+            className="w-100 mb-2"
           >
-            Sign Up
-          </button>
-        </form>
+            Sign up
+          </Button>
+          <Link id="wd-signin-link" href="/Kambaz/Account/Signin">
+            Sign in
+          </Link>
+        </Form>
       </div>
     </div>
   );

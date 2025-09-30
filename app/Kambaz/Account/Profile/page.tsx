@@ -1,21 +1,20 @@
+// app/Kambaz/Account/Profile/page.tsx
 "use client";
 
-import AccountSidebar from "../Sidebar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import AccountSidebar from "../Sidebar";
 
 export default function Profile() {
   const router = useRouter();
-
   const [username, setUsername] = useState("abi03");
   const [firstName, setFirstName] = useState("Abirami");
-  const [lastName, setLastName] = useState("Thiru");
+  const [lastName, setLastName] = useState("Thirunavukkarasu");
   const [password, setPassword] = useState("pass123");
-  const [dob, setDob] = useState("1990-01-01");
-  const [email, setEmail] = useState("xyz@gmail.com");
-  const [role, setRole] = useState("student");
-
-  const roles = ["student", "teacher", "admin", "guest"];
+  const [dob, setDob] = useState("2000-01-01");
+  const [email, setEmail] = useState("abirami@gmail.com");
+  const [role, setRole] = useState("STUDENT");
 
   const handleSignout = () => {
     router.push("/Kambaz/Account/Signin");
@@ -24,113 +23,73 @@ export default function Profile() {
   return (
     <div style={{ display: "flex" }}>
       <AccountSidebar />
-      <div style={{ flex: 1, paddingLeft: 20, color: "#000" }}>
-        <h2 style={{ fontWeight: "bold", fontSize: "1.8rem", marginBottom: "1rem" }}>
-          Account Profile
-        </h2>
-        <form>
-          <label htmlFor="wd-username" style={{ fontSize: "1rem", fontWeight: "bold" }}>Username</label><br />
-          <input
+      <div id="wd-profile-screen" style={{ padding: "2rem", maxWidth: "400px" }}>
+        <h3>Profile</h3>
+        <Form>
+          <Form.Control
             id="wd-username"
-            type="text"
-            value={username}
+            defaultValue={username}
+            className="mb-2"
+            placeholder="username"
             onChange={(e) => setUsername(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-firstname" style={{ fontSize: "1rem", fontWeight: "bold" }}>First Name</label><br />
-          <input
-            id="wd-firstname"
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-lastname" style={{ fontSize: "1rem", fontWeight: "bold" }}>Last Name</label><br />
-          <input
-            id="wd-lastname"
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-password" style={{ fontSize: "1rem", fontWeight: "bold" }}>Password</label><br />
-          <input
+          />
+          <Form.Control
             id="wd-password"
+            defaultValue={password}
             type="password"
-            value={password}
+            className="mb-2"
+            placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-dob" style={{ fontSize: "1rem", fontWeight: "bold" }}>Date of Birth</label><br />
-          <input
+          />
+          <Form.Control
+            id="wd-firstname"
+            defaultValue={firstName}
+            className="mb-2"
+            placeholder="First Name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Form.Control
+            id="wd-lastname"
+            defaultValue={lastName}
+            className="mb-2"
+            placeholder="Last Name"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Form.Control
             id="wd-dob"
+            defaultValue={dob}
             type="date"
-            value={dob}
+            className="mb-2"
             onChange={(e) => setDob(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-email" style={{ fontSize: "1rem", fontWeight: "bold" }}>Email</label><br />
-          <input
+          />
+          <Form.Control
             id="wd-email"
+            defaultValue={email}
             type="email"
-            value={email}
+            className="mb-2"
+            placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
-          /><br />
-
-          <label htmlFor="wd-role" style={{ fontSize: "1rem", fontWeight: "bold" }}>Role</label><br />
-          <select
+          />
+          <Form.Select
             id="wd-role"
-            value={role}
+            defaultValue={role}
+            className="mb-2"
             onChange={(e) => setRole(e.target.value)}
-            style={{ fontSize: "1rem", padding: "0.4rem", marginBottom: "1rem", width: "100%" }}
           >
-            {roles.map((r) => (
-              <option key={r} value={r}>
-                {r.charAt(0).toUpperCase() + r.slice(1)}
-              </option>
-            ))}
-          </select><br />
-
-          <button
-            type="button"
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            <option value="FACULTY">Faculty</option>
+            <option value="STUDENT">Student</option>
+          </Form.Select>
+          <Button
             id="wd-signout-btn"
             onClick={handleSignout}
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              backgroundColor: "#0070f3",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
+            variant="danger"
+            className="w-100"
           >
-            Sign Out
-          </button>
-        </form>
-        <br />
-        <button
-          onClick={() => router.push("/")}
-          style={{
-            padding: "0.5rem 1rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-            color: "#0070f3",
-            backgroundColor: "transparent",
-            border: "none",
-            cursor: "pointer",
-            textDecoration: "underline"
-          }}
-        >
-          Back to Kambaz Home
-        </button>
+            Sign out
+          </Button>
+        </Form>
       </div>
     </div>
   );
