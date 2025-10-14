@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 export default function FilterFunction() {
   let numberArray1 = [1, 2, 4, 5, 6];
   const numbersGreaterThan2 = numberArray1.filter((a) => a > 2);

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 export default function VariablesAndConstants() {
   var functionScoped = 2;  // Keep as var - this is teaching the difference!
   const blockScoped = 5;  // Changed from let to const

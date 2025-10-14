@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 export default function IfElse() {
   let true1 = true;
   let false1 = false;

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 export default function TernaryOperator() {
   const loggedIn = true;  // Changed from let to const
   

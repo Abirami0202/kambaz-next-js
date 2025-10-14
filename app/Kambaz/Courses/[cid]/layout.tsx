@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 import CourseSidebar from "./CourseSidebar";
 import * as db from "../../Database";

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 import Math, { add, subtract, multiply, divide } from "./Math";
 import * as Matematica from "./Math";
 
