@@ -1,11 +1,11 @@
 export default function VariableTypes() {
-  let numberVariable = 123;
-  let floatingPointNumber = 234.345;
-  let stringVariable = 'Hello World!';
-  let booleanVariable = true;
-  let isNumber = typeof numberVariable;
-  let isString = typeof stringVariable;
-  let isBoolean = typeof booleanVariable;
+  const numberVariable = 123;  // Changed from let
+  const floatingPointNumber = 234.345;  // Changed from let
+  const stringVariable = 'Hello World!';  // Changed from let
+  const booleanVariable = true;  // Changed from let
+  const isNumber = typeof numberVariable;  // Changed from let
+  const isString = typeof stringVariable;  // Changed from let
+  const isBoolean = typeof booleanVariable;  // Changed from let
   
   return (
     <div id="wd-variable-types">

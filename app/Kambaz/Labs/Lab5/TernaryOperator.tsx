@@ -1,5 +1,5 @@
 export default function TernaryOperator() {
-  let loggedIn = true;
+  const loggedIn = true;  // Changed from let to const
   
   return (
     <div id="wd-ternary-operator">

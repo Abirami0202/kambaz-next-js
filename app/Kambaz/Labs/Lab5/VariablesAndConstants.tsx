@@ -1,6 +1,6 @@
 export default function VariablesAndConstants() {
-  var functionScoped = 2;
-  let blockScoped = 5;
+  var functionScoped = 2;  // Keep as var - this is teaching the difference!
+  const blockScoped = 5;  // Changed from let to const
   const constant1 = functionScoped - blockScoped;
   
   return (
