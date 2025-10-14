@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "A101",
+    "title": "A1 - JavaScript Variables",
+    "course": "CS101",
+    "availableFrom": "2024-05-06",
+    "availableUntil": "2024-05-13",
+    "dueDate": "2024-05-13",
+    "points": 100,
+    "description": "Learn about variables, data types, and scope in JavaScript."
+  },
+  {
+    "_id": "A102",
+    "title": "A2 - Functions and Arrays",
+    "course": "CS101",
+    "availableFrom": "2024-05-13",
+    "availableUntil": "2024-05-20",
+    "dueDate": "2024-05-20",
+    "points": 100,
+    "description": "Master JavaScript functions and array manipulation."
+  },
+  {
+    "_id": "A103",
+    "title": "A3 - Async Programming",
+    "course": "CS101",
+    "availableFrom": "2024-05-20",
+    "availableUntil": "2024-05-27",
+    "dueDate": "2024-05-27",
+    "points": 100,
+    "description": "Understand promises, async/await, and callbacks."
+  },
+  {
+    "_id": "A201",
+    "title": "A1 - React Components",
+    "course": "CS102",
+    "availableFrom": "2024-05-06",
+    "availableUntil": "2024-05-13",
+    "dueDate": "2024-05-13",
+    "points": 100,
+    "description": "Build functional and class components in React."
+  },
+  {
+    "_id": "A202",
+    "title": "A2 - State and Props",
+    "course": "CS102",
+    "availableFrom": "2024-05-13",
+    "availableUntil": "2024-05-20",
+    "dueDate": "2024-05-20",
+    "points": 100,
+    "description": "Learn state management and prop passing in React."
+  },
+  {
+    "_id": "A203",
+    "title": "A3 - React Hooks",
+    "course": "CS102",
+    "availableFrom": "2024-05-20",
+    "availableUntil": "2024-05-27",
+    "dueDate": "2024-05-27",
+    "points": 100,
+    "description": "Master useState, useEffect, and custom hooks."
+  },
+  {
+    "_id": "A301",
+    "title": "A1 - Next.js Routing",
+    "course": "CS103",
+    "availableFrom": "2024-05-06",
+    "availableUntil": "2024-05-13",
+    "dueDate": "2024-05-13",
+    "points": 100,
+    "description": "Implement routing and navigation in Next.js applications."
+  },
+  {
+    "_id": "A302",
+    "title": "A2 - Server Components",
+    "course": "CS103",
+    "availableFrom": "2024-05-13",
+    "availableUntil": "2024-05-20",
+    "dueDate": "2024-05-20",
+    "points": 100,
+    "description": "Build server-side rendered components with Next.js."
+  },
+  {
+    "_id": "A303",
+    "title": "A3 - API Integration",
+    "course": "CS103",
+    "availableFrom": "2024-05-20",
+    "availableUntil": "2024-05-27",
+    "dueDate": "2024-05-27",
+    "points": 100,
+    "description": "Create and consume API routes in Next.js."
+  },
+  {
+    "_id": "A401",
+    "title": "A1 - Express Server",
+    "course": "CS104",
+    "availableFrom": "2024-05-06",
+    "availableUntil": "2024-05-13",
+    "dueDate": "2024-05-13",
+    "points": 100,
+    "description": "Build RESTful APIs with Express.js framework."
+  },
+  {
+    "_id": "A402",
+    "title": "A2 - Database Operations",
+    "course": "CS104",
+    "availableFrom": "2024-05-13",
+    "availableUntil": "2024-05-20",
+    "dueDate": "2024-05-20",
+    "points": 100,
+    "description": "Implement CRUD operations with MongoDB."
+  },
+  {
+    "_id": "A403",
+    "title": "A3 - Authentication",
+    "course": "CS104",
+    "availableFrom": "2024-05-20",
+    "availableUntil": "2024-05-27",
+    "dueDate": "2024-05-27",
+    "points": 100,
+    "description": "Implement user authentication and authorization."
+  },
+  {
+    "_id": "A501",
+    "title": "A1 - Full Stack Setup",
+    "course": "CS105",
+    "availableFrom": "2024-05-06",
+    "availableUntil": "2024-05-13",
+    "dueDate": "2024-05-13",
+    "points": 100,
+    "description": "Set up a complete full stack application architecture."
+  },
+  {
+    "_id": "A502",
+    "title": "A2 - Frontend-Backend Integration",
+    "course": "CS105",
+    "availableFrom": "2024-05-13",
+    "availableUntil": "2024-05-20",
+    "dueDate": "2024-05-20",
+    "points": 100,
+    "description": "Connect React frontend with Node.js backend."
+  },
+  {
+    "_id": "A503",
+    "title": "A3 - Deployment",
+    "course": "CS105",
+    "availableFrom": "2024-05-20",
+    "availableUntil": "2024-05-27",
+    "dueDate": "2024-05-27",
+    "points": 100,
+    "description": "Deploy full stack application to production."
+  }
+]

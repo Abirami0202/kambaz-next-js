@@ -31,6 +31,11 @@ export default function LabsPage() {
             Lab 4: Bootstrap & Components
           </Link>
         </li>
+        <li>
+          <Link href="/Kambaz/Labs/Lab5" id="wd-lab5-link">
+            Lab 5: JavaScript & React
+          </Link>
+        </li>
       </ul>
 
       <hr />

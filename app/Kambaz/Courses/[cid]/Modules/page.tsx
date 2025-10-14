@@ -1,4 +1,3 @@
-// app/Kambaz/Courses/Modules/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,32 +5,18 @@ import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button, Dropdown, ListGroup } from "react-bootstrap";
-
-const modules = [
-  {
-    _id: "M101",
-    name: "Week 1",
-    description: "Introduction to Programming",
-    course: "RS101",
-    lessons: [
-      { _id: "L101", name: "LEARNING OBJECTIVES", description: "Introduction to the course", module: "M101" },
-      { _id: "L102", name: "Introduction to the course", description: "", module: "M101" },
-      { _id: "L103", name: "Learn what is Web Development", description: "", module: "M101" },
-    ],
-  },
-  {
-    _id: "M102",
-    name: "Week 2",
-    description: "Advanced JavaScript",
-    course: "RS101",
-    lessons: [
-      { _id: "L201", name: "LESSON 1", description: "Closures and Scope", module: "M102" },
-      { _id: "L202", name: "LESSON 2", description: "Asynchronous Programming", module: "M102" },
-    ],
-  },
-];
+import { useParams } from "next/navigation";
+import * as db from "../../../Database";
 
 export default function Modules() {
+  const params = useParams();
+  const cid = params.cid as string;
+  
+  // Filter modules for the current course
+  const courseModules = db.modules.filter(
+    (module: any) => module.course === cid
+  );
+
   return (
     <div style={{ padding: "1rem" }}>
       {/* Module Controls */}
@@ -78,7 +63,7 @@ export default function Modules() {
 
       {/* Modules List */}
       <ListGroup id="wd-modules" className="rounded-0">
-        {modules.map((module) => (
+        {courseModules.map((module: any) => (
           <ListGroup.Item key={module._id} className="p-0 mb-5 fs-5 border-gray">
             {/* Module Title */}
             <div className="wd-title p-3 ps-2 bg-secondary">
@@ -93,9 +78,9 @@ export default function Modules() {
             </div>
 
             {/* Lessons */}
-            {module.lessons && (
+            {module.lessons && module.lessons.length > 0 && (
               <ListGroup className="rounded-0">
-                {module.lessons.map((lesson) => (
+                {module.lessons.map((lesson: any) => (
                   <ListGroup.Item
                     key={lesson._id}
                     className="p-3 ps-1"

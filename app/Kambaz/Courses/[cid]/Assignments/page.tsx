@@ -1,4 +1,3 @@
-// app/Kambaz/Courses/Assignments/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -7,38 +6,18 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, ListGroup, Form } from "react-bootstrap";
-
-const assignments = [
-  {
-    _id: "A101",
-    title: "A1 - ENV + HTML",
-    course: "RS101",
-    availableFrom: "2024-05-06",
-    availableUntil: "2024-05-13",
-    dueDate: "2024-05-13",
-    points: 100,
-  },
-  {
-    _id: "A102",
-    title: "A2 - CSS + BOOTSTRAP",
-    course: "RS101",
-    availableFrom: "2024-05-13",
-    availableUntil: "2024-05-20",
-    dueDate: "2024-05-20",
-    points: 100,
-  },
-  {
-    _id: "A103",
-    title: "A3 - JAVASCRIPT + REACT",
-    course: "RS101",
-    availableFrom: "2024-05-20",
-    availableUntil: "2024-05-27",
-    dueDate: "2024-05-27",
-    points: 100,
-  },
-];
+import { useParams } from "next/navigation";
+import * as db from "../../../Database";
 
 export default function Assignments() {
+  const params = useParams();
+  const cid = params.cid as string;
+  
+  // Filter assignments for the current course
+  const courseAssignments = db.assignments.filter(
+    (assignment: any) => assignment.course === cid
+  );
+
   return (
     <div id="wd-assignments" style={{ padding: "1rem" }}>
       {/* Controls */}
@@ -74,7 +53,7 @@ export default function Assignments() {
       </div>
 
       <ListGroup id="wd-assignment-list" className="rounded-0">
-        {assignments.map((assignment) => (
+        {courseAssignments.map((assignment: any) => (
           <ListGroup.Item
             key={assignment._id}
             className="wd-assignment-list-item p-3"
@@ -84,7 +63,7 @@ export default function Assignments() {
               <div>
                 <BsGripVertical className="me-2 fs-5" />
                 <Link
-                  href={`/Kambaz/Courses/Assignments/${assignment._id}/Editor`}
+                  href={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}/Editor`}
                   className="wd-assignment-link text-dark fw-bold"
                   style={{ textDecoration: "none" }}
                 >

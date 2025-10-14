@@ -1,33 +1,51 @@
-// app/Kambaz/Courses/Assignments/[id]/Editor/page.tsx
 "use client";
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import * as db from "../../../../../Database";
 
-interface AssignmentEditorProps {
-  params: Promise<{ id: string }>;
-}
+export default function AssignmentEditor() {
+  const params = useParams();
+  const cid = params.cid as string;
+  const aid = params.id as string;
+  
+  // Find the assignment from the database
+  const assignment = db.assignments.find((a: any) => a._id === aid);
+  
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    points: 100,
+    group: "ASSIGNMENTS",
+    grade: "Points",
+    submission: "Online",
+    entryOptions: [] as string[],
+    assignTo: "Everyone",
+    due: "",
+    availableFrom: "",
+    until: "",
+  });
 
-const defaults = {
-  name: "A1 - ENV + HTML",
-  description: "The assignment is available online. Submit a link to the landing page of your Web application running on Netlify.",
-  points: 100,
-  group: "ASSIGNMENTS",
-  grade: "Points",
-  submission: "Online",
-  entryOptions: ["Text Entry", "Website URL", "File Upload"],
-  assignTo: "Everyone",
-  due: "2024-05-13",
-  availableFrom: "2024-05-06",
-  until: "2024-05-20",
-};
-
-export default function AssignmentEditor({ params }: AssignmentEditorProps) {
-  const resolvedParams = React.use(params);
-  const id = resolvedParams.id;
-
-  const [form, setForm] = useState(defaults);
+  // Load assignment data when component mounts
+  useEffect(() => {
+    if (assignment) {
+      setForm({
+        name: assignment.title || "",
+        description: assignment.description || "The assignment is available online.",
+        points: assignment.points || 100,
+        group: "ASSIGNMENTS",
+        grade: "Points",
+        submission: "Online",
+        entryOptions: ["Text Entry", "Website URL", "File Upload"],
+        assignTo: "Everyone",
+        due: assignment.dueDate || "",
+        availableFrom: assignment.availableFrom || "",
+        until: assignment.availableUntil || "",
+      });
+    }
+  }, [assignment]);
 
   const handleCheckbox = (option: string) => {
     setForm((prev) => ({
@@ -72,7 +90,7 @@ export default function AssignmentEditor({ params }: AssignmentEditorProps) {
               id="wd-points"
               type="number"
               value={form.points}
-              onChange={(e) => setForm({ ...form, points: +e.target.value })}
+              onChange={(e) => setForm({ ...form, points: Number(e.target.value) })}
             />
           </Col>
         </Row>
@@ -236,7 +254,7 @@ export default function AssignmentEditor({ params }: AssignmentEditorProps) {
 
         <hr />
         <div className="d-flex justify-content-end">
-          <Link href="/Kambaz/Courses/Assignments">
+          <Link href={`/Kambaz/Courses/${cid}/Assignments`}>
             <Button variant="secondary" className="me-2">
               Cancel
             </Button>

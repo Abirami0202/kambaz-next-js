@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "CS101",
+    "name": "Introduction to JavaScript",
+    "number": "CS1234",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "CS",
+    "credits": 4,
+    "description": "Learn the basics of JavaScript programming language and modern web development."
+  },
+  {
+    "_id": "CS102",
+    "name": "React Fundamentals",
+    "number": "CS2345",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "CS",
+    "credits": 4,
+    "description": "Understand the core concepts of React framework and build dynamic user interfaces."
+  },
+  {
+    "_id": "CS103",
+    "name": "Next.js Deep Dive",
+    "number": "CS3456",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "CS",
+    "credits": 3,
+    "description": "Build powerful server-rendered React apps with Next.js framework."
+  },
+  {
+    "_id": "CS104",
+    "name": "Advanced Node.js",
+    "number": "CS4567",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "CS",
+    "credits": 4,
+    "description": "Master backend development with Node.js and Express framework."
+  },
+  {
+    "_id": "CS105",
+    "name": "Full Stack Development",
+    "number": "CS5678",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "CS",
+    "credits": 4,
+    "description": "Build complete web applications using modern full stack technologies."
+  }
+]
