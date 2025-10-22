@@ -12,15 +12,15 @@ import { FaBell, FaChartBar, FaBullhorn } from "react-icons/fa";
 export default function Home() {
   return (
     <div id="wd-home" style={{ display: "flex", padding: "1rem" }}>
-      {/* Modules - 70% width */}
-      <div style={{ flex: "0 0 70%", paddingRight: "1rem" }}>
+      {/* Modules - 70% width on large screens, 100% on small screens */}
+      <div style={{ flex: "1", paddingRight: "1rem" }}>
         <Modules />
       </div>
 
-      {/* Course Status - 30% width, hidden on smaller screens */}
+      {/* Course Status - Hidden on narrowest screens (below md breakpoint) */}
       <div 
         id="wd-course-status" 
-        className="d-none d-xl-block"
+        className="d-none d-md-block"
         style={{ flex: "0 0 30%", minWidth: "300px" }}
       >
         <h2>Course Status</h2>

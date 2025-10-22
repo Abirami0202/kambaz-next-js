@@ -40,7 +40,7 @@ export default function CourseSidebar() {
             style={{
               display: "block",
               padding: "0.75rem 1rem",
-              color: "red",
+              color: isActive ? "black" : "red",
               textDecoration: "none",
               backgroundColor: "white",
               borderLeft: isActive ? "3px solid black" : "3px solid transparent",

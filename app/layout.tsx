@@ -1,5 +1,6 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+"use client";
+
 import { Geist, Geist_Mono } from "next/font/google";
 // import "./globals.css";  // Keep commented
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,11 +16,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Kambaz - Web Development",
-  description: "Full Stack Next.js Web Application",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -28,8 +24,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NavigationSidebar />
-        <main style={{ marginLeft: "120px", padding: "0" }}>
+        {/* Navigation Sidebar - Hidden on screens smaller than md (768px) */}
+        <div className="d-none d-md-block">
+          <NavigationSidebar />
+        </div>
+        <main 
+          style={{ 
+            marginLeft: "120px", 
+            padding: "0" 
+          }}
+          className="d-none d-md-block"
+        >
+          {children}
+        </main>
+        {/* Full width content on small screens */}
+        <main 
+          style={{ 
+            marginLeft: "0", 
+            padding: "0" 
+          }}
+          className="d-block d-md-none"
+        >
           {children}
         </main>
       </body>

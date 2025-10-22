@@ -1,23 +1,37 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTrash } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, ListGroup, Form } from "react-bootstrap";
-import { useParams } from "next/navigation";
-import * as db from "../../../Database";
+import { useParams, useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const params = useParams();
+  const router = useRouter();
   const cid = params.cid as string;
+  const dispatch = useDispatch();
+  
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   
   // Filter assignments for the current course
-  const courseAssignments = db.assignments.filter(
+  const courseAssignments = assignments.filter(
     (assignment: any) => assignment.course === cid
   );
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    if (window.confirm("Are you sure you want to delete this assignment?")) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
+
+  const handleAddAssignment = () => {
+    router.push(`/Kambaz/Courses/${cid}/Assignments/new/Editor`);
+  };
 
   return (
     <div id="wd-assignments" style={{ padding: "1rem" }}>
@@ -32,7 +46,12 @@ export default function Assignments() {
             placeholder="Search for Assignments"
           />
         </div>
-        <Button variant="secondary" className="me-2 float-end" id="wd-add-assignment">
+        <Button 
+          variant="danger" 
+          className="me-2 float-end" 
+          id="wd-add-assignment"
+          onClick={handleAddAssignment}
+        >
           <BsPlus className="fs-4" />
           Assignment
         </Button>
@@ -71,13 +90,19 @@ export default function Assignments() {
                   {assignment.title}
                 </Link>
                 <div className="text-muted small mt-1">
-                  <span className="text-danger">Multiple Modules</span> | Not available until {assignment.availableFrom} |
+                  <span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> {assignment.availableFrom} |
                 </div>
                 <div className="text-muted small">
-                  Due {assignment.dueDate} | {assignment.points} pts
+                  <strong>Due</strong> {assignment.dueDate} | {assignment.points} <strong>pts</strong>
                 </div>
               </div>
               <div className="float-end">
+                <FaTrash
+                  className="text-danger me-3"
+                  onClick={() => handleDeleteAssignment(assignment._id)}
+                  style={{ cursor: "pointer" }}
+                  title="Delete Assignment"
+                />
                 <FaCheckCircle className="text-success me-2" />
                 <IoEllipsisVertical className="fs-4" />
               </div>

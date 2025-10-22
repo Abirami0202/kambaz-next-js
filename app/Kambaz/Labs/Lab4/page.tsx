@@ -1,6 +1,7 @@
 // app/Kambaz/Labs/Lab4/page.tsx
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Container, Row, Col, Table, ListGroup, ListGroupItem, Form, FormGroup, FormLabel, FormControl, FormSelect, InputGroup, Button, Card, CardImg, CardBody, CardTitle, CardText, Nav, NavItem, NavLink } from "react-bootstrap";
 import { FaCalendar, FaEnvelopeOpenText, FaRegClock } from "react-icons/fa";
@@ -10,9 +11,84 @@ import { VscAccount } from "react-icons/vsc";
 /* eslint-disable react/no-unescaped-entities */
 
 export default function Lab4() {
+  const [breakpoint, setBreakpoint] = useState("");
+
+  useEffect(() => {
+    const updateBreakpoint = () => {
+      const width = window.innerWidth;
+      if (width < 576) setBreakpoint("XS");
+      else if (width < 768) setBreakpoint("SM");
+      else if (width < 992) setBreakpoint("MD");
+      else if (width < 1200) setBreakpoint("LG");
+      else if (width < 1400) setBreakpoint("XL");
+      else setBreakpoint("XXL");
+    };
+
+    updateBreakpoint();
+    window.addEventListener("resize", updateBreakpoint);
+    return () => window.removeEventListener("resize", updateBreakpoint);
+  }, []);
+
   return (
     <Container id="wd-lab4">
       <h2>Lab 4 - Bootstrap & React Icons</h2>
+
+      {/* Responsive Breakpoint Indicator - Black Box */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "black",
+          color: "white",
+          padding: "15px 25px",
+          borderRadius: "8px",
+          fontWeight: "bold",
+          fontSize: "18px",
+          zIndex: 1000,
+          boxShadow: "0 4px 6px rgba(0,0,0,0.3)"
+        }}
+      >
+        {breakpoint}
+      </div>
+
+      {/* Pills Navigation - Table of Contents */}
+      <div id="wd-pills-navigation" className="mb-4">
+        <h3>Navigation</h3>
+        <Nav variant="pills" className="mb-3">
+          <NavItem>
+            <NavLink href="/Kambaz/Labs/Lab1">Lab 1</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Kambaz/Labs/Lab2">Lab 2</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Kambaz/Labs/Lab3">Lab 3</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Kambaz/Labs/Lab4">Lab 4</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Kambaz/Labs/Lab5">Lab 5</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/">Kanbas</NavLink>
+          </NavItem>
+        </Nav>
+        
+        {/* Pills - Git Repository Link */}
+        <Nav variant="pills">
+          <NavItem>
+            <NavLink 
+              href="https://github.com/Abirami0202/kambaz-next-js" 
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Git Repository
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </div>
 
       {/* React Icons */}
       <div id="wd-react-icons-sampler" className="mb-4">
@@ -210,15 +286,15 @@ export default function Lab4() {
       </div>
 
       {/* Dropdowns */}
-<div id="wd-css-styling-dropdowns" className="mt-4">
-  <h3>Dropdowns</h3>
-  <FormSelect defaultValue="">  {/* ✅ Add defaultValue here */}
-    <option value="">Open this select menu</option>  {/* ✅ Remove 'selected', add value */}
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </FormSelect>
-</div>
+      <div id="wd-css-styling-dropdowns" className="mt-4">
+        <h3>Dropdowns</h3>
+        <FormSelect defaultValue="">
+          <option value="">Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </FormSelect>
+      </div>
 
       {/* Switches */}
       <div id="wd-css-styling-switches" className="mt-4">
@@ -354,8 +430,10 @@ export default function Lab4() {
       <div className="mt-4">
         <h4>Labs Navigation</h4>
         <Link href="/Kambaz/Labs/Lab1">Lab 1</Link> |{" "}
+        <Link href="/Kambaz/Labs/Lab2">Lab 2</Link> |{" "}
         <Link href="/Kambaz/Labs/Lab3">Lab 3</Link> |{" "}
         <Link href="/Kambaz/Labs/Lab4">Lab 4</Link> |{" "}
+        <Link href="/Kambaz/Labs/Lab5">Lab 5</Link> |{" "}
         <Link href="/">Kambaz Application</Link>
       </div>
     </Container>

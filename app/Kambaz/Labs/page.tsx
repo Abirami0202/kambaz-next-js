@@ -1,4 +1,3 @@
-// app/Kambaz/Labs/page.tsx
 import Link from "next/link";
 
 export default function LabsPage() {
@@ -34,6 +33,12 @@ export default function LabsPage() {
         <li>
           <Link href="/Kambaz/Labs/Lab5" id="wd-lab5-link">
             Lab 5: JavaScript & React
+          </Link>
+        </li>
+        {/* NEW LAB 6 */}
+        <li>
+          <Link href="/Kambaz/Labs/Lab6" id="wd-lab6-link">
+            Lab 6: State Management & Redux
           </Link>
         </li>
       </ul>
