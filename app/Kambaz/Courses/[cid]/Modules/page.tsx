@@ -32,7 +32,7 @@ export default function Modules() {
   
   // Filter modules for the current course
   const courseModules = modules.filter(
-    (module: any) => module.course === cid
+    (mod: any) => mod.course === cid
   );
 
   // MODULE FUNCTIONS
@@ -114,9 +114,9 @@ export default function Modules() {
   };
 
   const editLesson = (moduleId: string, lessonId: string) => {
-    const module = modules.find((m: any) => m._id === moduleId);
-    if (module) {
-      const lesson = module.lessons.find((l: any) => l._id === lessonId);
+    const foundModule = modules.find((m: any) => m._id === moduleId);
+    if (foundModule) {
+      const lesson = foundModule.lessons.find((l: any) => l._id === lessonId);
       if (lesson) {
         setEditingLessonInlineId(lessonId);
         setEditingLessonInlineName(lesson.name);
@@ -159,29 +159,29 @@ export default function Modules() {
 
       {/* Modules List */}
       <ListGroup id="wd-modules" className="rounded-0">
-        {courseModules.map((module: any) => (
-          <ListGroup.Item key={module._id} className="p-0 mb-5 fs-5 border-gray">
+        {courseModules.map((mod: any) => (
+          <ListGroup.Item key={mod._id} className="p-0 mb-5 fs-5 border-gray">
             {/* Module Title */}
             <div className="wd-title p-3 ps-2 bg-secondary">
               <BsGripVertical className="me-2 fs-3" />
               
               {/* Inline Module Name Editing */}
-              {editingModuleId === module._id ? (
+              {editingModuleId === mod._id ? (
                 <input
                   type="text"
                   className="form-control d-inline-block"
                   style={{ width: "50%", display: "inline" }}
                   value={editingModuleName}
                   onChange={(e) => setEditingModuleName(e.target.value)}
-                  onBlur={() => saveModuleName(module._id)}
+                  onBlur={() => saveModuleName(mod._id)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") saveModuleName(module._id);
+                    if (e.key === "Enter") saveModuleName(mod._id);
                     if (e.key === "Escape") cancelModuleEdit();
                   }}
                   autoFocus
                 />
               ) : (
-                <span>{module.name}</span>
+                <span>{mod.name}</span>
               )}
               
               {/* Module Control Buttons */}
@@ -189,27 +189,27 @@ export default function Modules() {
                 <FaPencil 
                   className="text-primary me-3" 
                   style={{ cursor: "pointer" }}
-                  onClick={() => startEditingModule(module._id, module.name)}
+                  onClick={() => startEditingModule(mod._id, mod.name)}
                 />
                 <FaTrash 
                   className="text-danger me-2" 
                   style={{ cursor: "pointer" }}
-                  onClick={() => deleteModule(module._id)}
+                  onClick={() => deleteModule(mod._id)}
                 />
                 <FaCheckCircle className="text-success me-2" />
                 <BsPlus 
                   className="fs-4" 
                   style={{ cursor: "pointer" }}
-                  onClick={() => openAddLessonDialog(module._id)}
+                  onClick={() => openAddLessonDialog(mod._id)}
                 />
                 <IoEllipsisVertical className="fs-4 ms-1" />
               </div>
             </div>
 
             {/* Lessons */}
-            {module.lessons && module.lessons.length > 0 && (
+            {mod.lessons && mod.lessons.length > 0 && (
               <ListGroup className="rounded-0">
-                {module.lessons.map((lesson: any) => (
+                {mod.lessons.map((lesson: any) => (
                   <ListGroup.Item
                     key={lesson._id}
                     className="p-3 ps-1"
@@ -225,9 +225,9 @@ export default function Modules() {
                         style={{ width: "50%", display: "inline" }}
                         value={editingLessonInlineName}
                         onChange={(e) => setEditingLessonInlineName(e.target.value)}
-                        onBlur={() => saveLessonName(module._id, lesson._id)}
+                        onBlur={() => saveLessonName(mod._id, lesson._id)}
                         onKeyDown={(e) => {
-                          if (e.key === "Enter") saveLessonName(module._id, lesson._id);
+                          if (e.key === "Enter") saveLessonName(mod._id, lesson._id);
                           if (e.key === "Escape") cancelLessonEdit();
                         }}
                         autoFocus
@@ -239,13 +239,13 @@ export default function Modules() {
                     {/* Lesson Control Buttons */}
                     <div className="float-end">
                       <FaPencil
-                        onClick={() => editLesson(module._id, lesson._id)}
+                        onClick={() => editLesson(mod._id, lesson._id)}
                         className="text-primary me-3"
                         style={{ cursor: "pointer" }}
                       />
                       <FaTrash
                         className="text-danger me-2"
-                        onClick={() => deleteLesson(module._id, lesson._id)}
+                        onClick={() => deleteLesson(mod._id, lesson._id)}
                         style={{ cursor: "pointer" }}
                       />
                       <FaCheckCircle className="text-success me-2" />
