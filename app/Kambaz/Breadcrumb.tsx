@@ -4,16 +4,35 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+}
+
+interface CoursesState {
+  courses: Course[];
+}
+
+interface RootState {
+  coursesReducer: CoursesState;
+}
+
 export default function Breadcrumb() {
   const pathname = usePathname();
-  const { courses } = useSelector((state: any) => state.coursesReducer);
+  const { courses } = useSelector((state: RootState) => state.coursesReducer);
 
   // Extract course ID from pathname
   const courseIdMatch = pathname.match(/\/Courses\/([^\/]+)/);
   const courseId = courseIdMatch ? courseIdMatch[1] : null;
 
   // Find the course
-  const course = courses.find((c: any) => c._id === courseId);
+  const course = courses.find((c: Course) => c._id === courseId);
 
   // Determine current page
   const isDashboard = pathname.includes("/Dashboard");
