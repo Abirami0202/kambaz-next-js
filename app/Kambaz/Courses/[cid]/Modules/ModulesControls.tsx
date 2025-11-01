@@ -2,7 +2,7 @@
 
 import { Button, Dropdown } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaBan } from "react-icons/fa";
 import { useState } from "react";
 import ModuleEditor from "./ModuleEditor";
 
@@ -75,10 +75,6 @@ export default function ModulesControls({
           Publish All
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item id="wd-publish-all">
-            <FaCheckCircle className="text-success me-2" />
-            Publish All
-          </Dropdown.Item>
           <Dropdown.Item id="wd-publish-all-modules-and-items">
             <FaCheckCircle className="text-success me-2" />
             Publish all modules and items
@@ -88,9 +84,11 @@ export default function ModulesControls({
             Publish modules only
           </Dropdown.Item>
           <Dropdown.Item id="wd-unpublish-all-modules-and-items">
+            <FaBan className="me-2" />
             Unpublish all modules and items
           </Dropdown.Item>
           <Dropdown.Item id="wd-unpublish-modules-only">
+            <FaBan className="me-2" />
             Unpublish modules only
           </Dropdown.Item>
         </Dropdown.Menu>
