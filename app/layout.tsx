@@ -2,7 +2,6 @@
 "use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
-// import "./globals.css";  // Keep commented
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationSidebar from "./Kambaz/NavigationSidebar";
 

@@ -1,12 +1,17 @@
 "use client";
 
-import { ReactNode } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
+import Breadcrumb from "./Breadcrumb";
 
-export default function KambazLayout({ children }: { children: ReactNode }) {
+export default function KambazLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Provider store={store}>
+      <Breadcrumb />
       {children}
     </Provider>
   );

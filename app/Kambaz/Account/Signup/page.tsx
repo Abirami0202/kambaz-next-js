@@ -9,9 +9,9 @@ import AccountSidebar from "../Sidebar";
 
 export default function Signup() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifyPassword, setVerifyPassword] = useState("");
+  const [username, setUsername] = useState("abirami");
+  const [password, setPassword] = useState("abirami123");
+  const [verifyPassword, setVerifyPassword] = useState("abirami123");
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
