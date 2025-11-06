@@ -41,14 +41,18 @@ export default function Dashboard() {
         // Mark which courses user is enrolled in
         const coursesWithEnrollment = allCourses.map((c: any) => ({
           ...c,
-          enrolled: enrolledCourses.some((ec: any) => ec._id === c._id)
+          enrolled: enrolledCourses.some((ec: any) => ec._id === c._id) || false
         }));
         
         dispatch(setCourses(coursesWithEnrollment));
       } else {
         // Show only enrolled courses
         const enrolledCourses = await accountClient.findCoursesForUser(currentUser._id);
-        dispatch(setCourses(enrolledCourses));
+        const coursesWithFlag = enrolledCourses.map((c: any) => ({
+          ...c,
+          enrolled: true
+        }));
+        dispatch(setCourses(coursesWithFlag));
       }
     } catch (error) {
       console.error("Error fetching courses:", error);
@@ -62,9 +66,20 @@ export default function Dashboard() {
   }, [currentUser, showAllCourses]);
 
   const addNewCourse = async () => {
+    console.log("Current User:", currentUser);
+    console.log("Current User ID:", currentUser._id);
+    
     try {
       const newCourse = await coursesClient.createCourse(course);
-      dispatch(addCourse(newCourse));
+      console.log("New Course Created:", newCourse);
+      
+      // Auto-enroll the faculty member in their new course
+      await accountClient.enrollInCourse(currentUser._id, newCourse._id);
+      console.log("Enrollment successful!");
+      
+      // After creating and enrolling, refresh courses to get updated list
+      await fetchCourses();
+      
       setCourse({
         _id: "",
         name: "New Course",
@@ -85,7 +100,7 @@ export default function Dashboard() {
   const removeCourse = async (courseId: string) => {
     try {
       await coursesClient.deleteCourse(courseId);
-      dispatch(deleteCourse(courseId));
+      await fetchCourses();
     } catch (error) {
       console.error("Error deleting course:", error);
     }
@@ -99,8 +114,8 @@ export default function Dashboard() {
 
   const saveUpdatedCourse = async () => {
     try {
-      const updatedCourse = await coursesClient.updateCourse(course);
-      dispatch(updateCourse(updatedCourse));
+      await coursesClient.updateCourse(course);
+      await fetchCourses();
       setCourse({
         _id: "",
         name: "New Course",
@@ -123,14 +138,18 @@ export default function Dashboard() {
       if (enrolled) {
         // Unenroll
         await accountClient.unenrollFromCourse(currentUser._id, courseId);
+        alert("Unenrolled successfully!");
       } else {
         // Enroll
         await accountClient.enrollInCourse(currentUser._id, courseId);
+        alert("Enrolled successfully!");
       }
+      
       // Refresh courses after enrollment change
-      fetchCourses();
+      await fetchCourses();
     } catch (error) {
       console.error("Error updating enrollment:", error);
+      alert("Enrollment failed!");
     }
   };
 
@@ -167,8 +186,8 @@ export default function Dashboard() {
       </h1>
       <hr />
 
-      {/* New Course Button */}
-      {!showForm && currentUser.role === "FACULTY" && (
+      {/* New Course Button - Only show for FACULTY and when not showing all courses */}
+      {!showForm && !showAllCourses && currentUser.role === "FACULTY" && (
         <div className="mb-4">
           <Button
             variant="danger"
@@ -271,7 +290,7 @@ export default function Dashboard() {
                     </Card.Text>
                     <Button variant="primary">Go</Button>
                     
-                    {/* Show enrollment button when viewing all courses */}
+                    {/* Show enrollment buttons when viewing all courses */}
                     {showAllCourses && (
                       <Button
                         variant={courseItem.enrolled ? "danger" : "success"}
@@ -285,7 +304,7 @@ export default function Dashboard() {
                       </Button>
                     )}
                     
-                    {/* Show edit/delete buttons only for faculty and only when not showing all courses */}
+                    {/* Show edit/delete buttons only for FACULTY and only on My Courses view */}
                     {!showAllCourses && currentUser.role === "FACULTY" && (
                       <>
                         <Button
