@@ -35,10 +35,21 @@ export default function LabsPage() {
             Lab 5: JavaScript & React
           </Link>
         </li>
-        {/* NEW LAB 6 */}
         <li>
           <Link href="/Kambaz/Labs/Lab6" id="wd-lab6-link">
             Lab 6: State Management & Redux
+          </Link>
+        </li>
+        {/* NEW LAB 7 */}
+        <li>
+          <Link href="/Kambaz/Labs/Lab7" id="wd-lab7-link">
+            Lab 7: Node.js & Express Server
+          </Link>
+        </li>
+        {/* NEW LAB 8 */}
+        <li>
+          <Link href="/Kambaz/Labs/Lab8" id="wd-lab8-link">
+            Lab 8: Asynchronous JavaScript and AJAX
           </Link>
         </li>
       </ul>

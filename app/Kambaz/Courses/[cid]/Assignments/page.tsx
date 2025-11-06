@@ -9,7 +9,10 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, ListGroup, Form } from "react-bootstrap";
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
+import * as coursesClient from "../../client";
+import * as assignmentsClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
   const params = useParams();
@@ -18,15 +21,34 @@ export default function Assignments() {
   const dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+
+  // Fetch assignments from server when course changes
+  const fetchAssignments = async () => {
+    try {
+      const assignments = await coursesClient.findAssignmentsForCourse(cid);
+      dispatch(setAssignments(assignments));
+    } catch (error) {
+      console.error("Error fetching assignments:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
   
   // Filter assignments for the current course
   const courseAssignments = assignments.filter(
     (assignment: any) => assignment.course === cid
   );
 
-  const handleDeleteAssignment = (assignmentId: string) => {
+  const handleDeleteAssignment = async (assignmentId: string) => {
     if (window.confirm("Are you sure you want to delete this assignment?")) {
-      dispatch(deleteAssignment(assignmentId));
+      try {
+        await assignmentsClient.deleteAssignment(assignmentId);
+        dispatch(deleteAssignment(assignmentId));
+      } catch (error) {
+        console.error("Error deleting assignment:", error);
+      }
     }
   };
 

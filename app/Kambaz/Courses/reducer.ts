@@ -1,32 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice } from "@reduxjs/toolkit";
-import { courses as initialCourses } from "../Database";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+}
 
 const initialState = {
-  courses: initialCourses,
+  courses: [] as Course[],
 };
 
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {
-    addCourse: (state, action) => {
-      const newCourse = {
-        ...action.payload,
-        _id: new Date().getTime().toString(),
-      };
-      state.courses = [...state.courses, newCourse];
+    setCourses: (state, action: PayloadAction<Course[]>) => {
+      state.courses = action.payload;
     },
-    deleteCourse: (state, action) => {
-      state.courses = state.courses.filter((course: any) => course._id !== action.payload);
+    addCourse: (state, action: PayloadAction<Course>) => {
+      state.courses = [...state.courses, action.payload];
     },
-    updateCourse: (state, action) => {
-      state.courses = state.courses.map((course: any) =>
+    deleteCourse: (state, action: PayloadAction<string>) => {
+      state.courses = state.courses.filter((course) => course._id !== action.payload);
+    },
+    updateCourse: (state, action: PayloadAction<Course>) => {
+      state.courses = state.courses.map((course) =>
         course._id === action.payload._id ? action.payload : course
       );
     },
   },
 });
 
-export const { addCourse, deleteCourse, updateCourse } = coursesSlice.actions;
+export const { setCourses, addCourse, deleteCourse, updateCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;

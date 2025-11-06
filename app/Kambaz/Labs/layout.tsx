@@ -56,6 +56,18 @@ export default function LabsLayout({ children }: { children: ReactNode }) {
             Lab 6
           </Link>
           <Link 
+            href="/Kambaz/Labs/Lab7" 
+            className={`nav-link ${pathname.includes("Lab7") ? "active" : ""}`}
+          >
+            Lab 7
+          </Link>
+          <Link 
+            href="/Kambaz/Labs/Lab8" 
+            className={`nav-link ${pathname.includes("Lab8") ? "active" : ""}`}
+          >
+            Lab 8
+          </Link>
+          <Link 
             href="/" 
             className="nav-link"
           >

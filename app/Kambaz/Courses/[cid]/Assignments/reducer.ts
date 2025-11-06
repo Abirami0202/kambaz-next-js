@@ -1,32 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice } from "@reduxjs/toolkit";
-import * as db from "../../../Database";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface Assignment {
+  _id: string;
+  title: string;
+  course: string;
+  availableFrom: string;
+  availableUntil: string;
+  dueDate: string;
+  points: number;
+  description: string;
+}
 
 const initialState = {
-  assignments: db.assignments,
+  assignments: [] as Assignment[],
 };
 
 const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
-    setAssignments: (state, action) => {
+    setAssignments: (state, action: PayloadAction<Assignment[]>) => {
       state.assignments = action.payload;
     },
-    addAssignment: (state, action) => {
-      const newAssignment = {
-        ...action.payload,
-        _id: new Date().getTime().toString(),
-      };
-      state.assignments = [...state.assignments, newAssignment];
+    addAssignment: (state, action: PayloadAction<Assignment>) => {
+      state.assignments = [...state.assignments, action.payload];
     },
-    deleteAssignment: (state, action) => {
+    deleteAssignment: (state, action: PayloadAction<string>) => {
       state.assignments = state.assignments.filter(
-        (assignment: any) => assignment._id !== action.payload
+        (assignment) => assignment._id !== action.payload
       );
     },
-    updateAssignment: (state, action) => {
-      state.assignments = state.assignments.map((assignment: any) =>
+    updateAssignment: (state, action: PayloadAction<Assignment>) => {
+      state.assignments = state.assignments.map((assignment) =>
         assignment._id === action.payload._id ? action.payload : assignment
       );
     },

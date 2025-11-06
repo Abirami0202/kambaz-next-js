@@ -7,12 +7,14 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment } from "../../reducer";
+import * as coursesClient from "@/app/Kambaz/Courses/client";
+import * as assignmentsClient from "@/app/Kambaz/Courses/[cid]/Assignments/client";
 
 export default function AssignmentEditor() {
   const params = useParams();
   const router = useRouter();
   const cid = params.cid as string;
-  const id = params.id as string;
+  const id = params.id as string;  // Using 'id' not 'aid'
   const dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
@@ -55,14 +57,22 @@ export default function AssignmentEditor() {
     }
   }, [assignment, id, cid]);
 
-  const handleSave = () => {
-    console.log("Saving assignment:", form);
-    if (id === "new") {
-      dispatch(addAssignment(form));
-    } else {
-      dispatch(updateAssignment(form));
+  const handleSave = async () => {
+    try {
+      if (id === "new" || !form._id) {
+        // Creating new assignment - use course route
+        const newAssignment = await coursesClient.createAssignmentForCourse(cid, form);
+        dispatch(addAssignment(newAssignment));
+      } else {
+        // Updating existing assignment - use assignment route
+        const updatedAssignment = await assignmentsClient.updateAssignment(form);
+        dispatch(updateAssignment(updatedAssignment));
+      }
+      router.push(`/Kambaz/Courses/${cid}/Assignments`);
+    } catch (error) {
+      console.error("Error saving assignment:", error);
+      alert("Failed to save assignment");
     }
-    router.push(`/Kambaz/Courses/${cid}/Assignments`);
   };
 
   return (
