@@ -18,6 +18,7 @@ export default function AssignmentEditor() {
   const dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const assignment = assignments.find((a: any) => a._id === id);
   
   const [form, setForm] = useState({
@@ -224,9 +225,11 @@ export default function AssignmentEditor() {
               Cancel
             </Button>
           </Link>
-          <Button variant="danger" onClick={handleSave}>
-            Save
-          </Button>
+          {currentUser?.role === "FACULTY" && (
+            <Button variant="danger" onClick={handleSave}>
+              Save
+            </Button>
+          )}
         </div>
       </Form>
     </div>

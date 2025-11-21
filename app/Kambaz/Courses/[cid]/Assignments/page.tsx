@@ -21,6 +21,7 @@ export default function Assignments() {
   const dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   // Fetch assignments from server when course changes
   const fetchAssignments = async () => {
@@ -69,19 +70,23 @@ export default function Assignments() {
             placeholder="Search for Assignments"
           />
         </div>
-        <Button 
-          variant="danger" 
-          className="me-2 float-end" 
-          id="wd-add-assignment"
-          onClick={handleAddAssignment}
-        >
-          <BsPlus className="fs-4" />
-          Assignment
-        </Button>
-        <Button variant="secondary" className="me-2 float-end" id="wd-add-assignment-group">
-          <BsPlus className="fs-4" />
-          Group
-        </Button>
+        {currentUser?.role === "FACULTY" && (
+          <>
+            <Button 
+              variant="danger" 
+              className="me-2 float-end" 
+              id="wd-add-assignment"
+              onClick={handleAddAssignment}
+            >
+              <BsPlus className="fs-4" />
+              Assignment
+            </Button>
+            <Button variant="secondary" className="me-2 float-end" id="wd-add-assignment-group">
+              <BsPlus className="fs-4" />
+              Group
+            </Button>
+          </>
+        )}
       </div>
 
       <br /><br />
@@ -120,12 +125,14 @@ export default function Assignments() {
                 </div>
               </div>
               <div className="float-end">
-                <FaTrash
-                  className="text-danger me-3"
-                  onClick={() => handleDeleteAssignment(assignment._id)}
-                  style={{ cursor: "pointer" }}
-                  title="Delete Assignment"
-                />
+                {currentUser?.role === "FACULTY" && (
+                  <FaTrash
+                    className="text-danger me-3"
+                    onClick={() => handleDeleteAssignment(assignment._id)}
+                    style={{ cursor: "pointer" }}
+                    title="Delete Assignment"
+                  />
+                )}
                 <FaCheckCircle className="text-success me-2" />
                 <IoEllipsisVertical className="fs-4" />
               </div>

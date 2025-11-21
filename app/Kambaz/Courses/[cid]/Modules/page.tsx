@@ -22,6 +22,7 @@ export default function Modules() {
   const cid = params.cid as string;
   const dispatch = useDispatch();
   const { modules } = useSelector((state: any) => state.modulesReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   
   const [moduleName, setModuleName] = useState("");
   const [lessonName, setLessonName] = useState("");
@@ -190,11 +191,13 @@ export default function Modules() {
   return (
     <div style={{ padding: "1rem" }}>
       {/* Module Controls */}
-      <ModulesControls
-        moduleName={moduleName}
-        setModuleName={setModuleName}
-        addModule={addModuleHandler}
-      />
+      {currentUser?.role === "FACULTY" && (
+        <ModulesControls
+          moduleName={moduleName}
+          setModuleName={setModuleName}
+          addModule={addModuleHandler}
+        />
+      )}
 
       <br /><br /><br />
 
@@ -226,25 +229,27 @@ export default function Modules() {
               )}
               
               {/* Module Control Buttons */}
-              <div className="float-end">
-                <FaPencil 
-                  className="text-primary me-3" 
-                  style={{ cursor: "pointer" }}
-                  onClick={() => startEditingModule(mod._id, mod.name)}
-                />
-                <FaTrash 
-                  className="text-danger me-2" 
-                  style={{ cursor: "pointer" }}
-                  onClick={() => deleteModuleHandler(mod._id)}
-                />
-                <FaCheckCircle className="text-success me-2" />
-                <BsPlus 
-                  className="fs-4" 
-                  style={{ cursor: "pointer" }}
-                  onClick={() => openAddLessonDialog(mod._id)}
-                />
-                <IoEllipsisVertical className="fs-4 ms-1" />
-              </div>
+              {currentUser?.role === "FACULTY" && (
+                <div className="float-end">
+                  <FaPencil 
+                    className="text-primary me-3" 
+                    style={{ cursor: "pointer" }}
+                    onClick={() => startEditingModule(mod._id, mod.name)}
+                  />
+                  <FaTrash 
+                    className="text-danger me-2" 
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteModuleHandler(mod._id)}
+                  />
+                  <FaCheckCircle className="text-success me-2" />
+                  <BsPlus 
+                    className="fs-4" 
+                    style={{ cursor: "pointer" }}
+                    onClick={() => openAddLessonDialog(mod._id)}
+                  />
+                  <IoEllipsisVertical className="fs-4 ms-1" />
+                </div>
+              )}
             </div>
 
             {/* Lessons */}
@@ -278,20 +283,22 @@ export default function Modules() {
                     )}
                     
                     {/* Lesson Control Buttons */}
-                    <div className="float-end">
-                      <FaPencil
-                        onClick={() => editLesson(mod._id, lesson._id)}
-                        className="text-primary me-3"
-                        style={{ cursor: "pointer" }}
-                      />
-                      <FaTrash
-                        className="text-danger me-2"
-                        onClick={() => deleteLesson(mod._id, lesson._id)}
-                        style={{ cursor: "pointer" }}
-                      />
-                      <FaCheckCircle className="text-success me-2" />
-                      <IoEllipsisVertical className="fs-4" />
-                    </div>
+                    {currentUser?.role === "FACULTY" && (
+                      <div className="float-end">
+                        <FaPencil
+                          onClick={() => editLesson(mod._id, lesson._id)}
+                          className="text-primary me-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                        <FaTrash
+                          className="text-danger me-2"
+                          onClick={() => deleteLesson(mod._id, lesson._id)}
+                          style={{ cursor: "pointer" }}
+                        />
+                        <FaCheckCircle className="text-success me-2" />
+                        <IoEllipsisVertical className="fs-4" />
+                      </div>
+                    )}
                   </ListGroup.Item>
                 ))}
               </ListGroup>
