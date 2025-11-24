@@ -1,7 +1,6 @@
 [
   {
-    "_id": "123",
-    "username": "abirami",
+    "username": "abirami1",
     "password": "abi123",
     "firstName": "Abirami",
     "lastName": "Thirunavukkarasu",
@@ -14,7 +13,6 @@
     "totalActivity": "10:21:32"
   },
   {
-    "_id": "234",
     "username": "malar",
     "password": "mal123",
     "firstName": "Malar",
@@ -28,7 +26,6 @@
     "totalActivity": "12:15:20"
   },
   {
-    "_id": "345",
     "username": "vimal",
     "password": "vim123",
     "firstName": "Vimal",
@@ -42,13 +39,12 @@
     "totalActivity": "08:45:10"
   },
   {
-    "_id": "456",
     "username": "arun",
     "password": "aru123",
     "firstName": "Arun",
     "lastName": "Raj",
     "email": "arun@northeastern.edu",
-    "dob": "1998-11-25",
+    "dob": "2000-11-25",
     "role": "TA",
     "loginId": "001234564T",
     "section": "S101",
@@ -56,13 +52,12 @@
     "totalActivity": "15:30:45"
   },
   {
-    "_id": "567",
     "username": "priya",
     "password": "pri123",
     "firstName": "Priya",
     "lastName": "Sharma",
     "email": "priya@northeastern.edu",
-    "dob": "2000-07-18",
+    "dob": "1998-07-12",
     "role": "STUDENT",
     "loginId": "001234565S",
     "section": "S102",
@@ -70,17 +65,29 @@
     "totalActivity": "09:20:15"
   },
   {
-    "_id": "678",
     "username": "karthik",
     "password": "kar123",
     "firstName": "Karthik",
     "lastName": "Venkat",
     "email": "karthik@northeastern.edu",
-    "dob": "1999-12-05",
+    "dob": "2001-01-30",
     "role": "STUDENT",
     "loginId": "001234566S",
     "section": "S101",
     "lastActivity": "2024-10-06",
     "totalActivity": "11:10:30"
+  },
+  {
+    "username": "sujatha",
+    "password": "suja123",
+    "firstName": "suji",
+    "lastName": "gopal",
+    "email": "sujatha@northeastern.edu",
+    "dob": "1997-09-18",
+    "role": "ADMIN",
+    "loginId": "001234567A",
+    "section": "S101",
+    "lastActivity": "2024-10-07",
+    "totalActivity": "20:45:50"
   }
 ]

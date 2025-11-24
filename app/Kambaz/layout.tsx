@@ -3,6 +3,7 @@
 import { Provider } from "react-redux";
 import store from "./store";
 import Breadcrumb from "./Breadcrumb";
+import Session from "./Account/Session";
 
 export default function KambazLayout({
   children,
@@ -11,8 +12,10 @@ export default function KambazLayout({
 }) {
   return (
     <Provider store={store}>
-      <Breadcrumb />
-      {children}
+      <Session>
+        <Breadcrumb />
+        {children}
+      </Session>
     </Provider>
   );
 }

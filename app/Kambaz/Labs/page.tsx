@@ -35,10 +35,15 @@ export default function LabsPage() {
             Lab 5: JavaScript & React
           </Link>
         </li>
-        {/* NEW LAB 6 */}
         <li>
           <Link href="/Kambaz/Labs/Lab6" id="wd-lab6-link">
             Lab 6: State Management & Redux
+          </Link>
+        </li>
+        {/* NEW LAB 7 for Chapter 6 MongoDB */}
+        <li>
+          <Link href="/Kambaz/Labs/Lab7" id="wd-lab7-link">
+            Lab 7: MongoDB Integration
           </Link>
         </li>
       </ul>
@@ -58,7 +63,17 @@ export default function LabsPage() {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            GitHub Repository
+            React GitHub Repository
+          </a>
+        </li>
+        <li>
+          <a 
+            id="wd-github-node" 
+            href="https://github.com/Abirami0202/kambaz-node-server-app" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Node GitHub Repository
           </a>
         </li>
       </ul>

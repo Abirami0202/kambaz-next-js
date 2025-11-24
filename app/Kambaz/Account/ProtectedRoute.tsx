@@ -4,17 +4,19 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Account() {
-  const router = useRouter();
+export default function ProtectedRoute({ children }: { children: any }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const router = useRouter();
 
   useEffect(() => {
-    if (currentUser) {
-      router.push("/Kambaz/Account/Profile");
-    } else {
+    if (!currentUser) {
       router.push("/Kambaz/Account/Signin");
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
-  return null;
+  if (!currentUser) {
+    return null;
+  }
+
+  return children;
 }

@@ -1,45 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice } from "@reduxjs/toolkit";
-import * as db from "../../../Database";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
-  modules: db.modules,
+interface Module {
+  _id: string;
+  name: string;
+  description?: string;
+  course: string;
+  lessons: any[];
+  editing?: boolean;
+}
+
+interface ModulesState {
+  modules: Module[];
+}
+
+const initialState: ModulesState = {
+  modules: [],
 };
 
 const modulesSlice = createSlice({
   name: "modules",
   initialState,
   reducers: {
-    setModules: (state, action) => {
+    setModules: (state, action: PayloadAction<Module[]>) => {
       state.modules = action.payload;
     },
-    addModule: (state, action) => {
-      const newModule = {
-        ...action.payload,
-        _id: new Date().getTime().toString(),
-        lessons: [],
-      };
-      state.modules = [...state.modules, newModule];
+    addModule: (state, action: PayloadAction<Module>) => {
+      state.modules = [...state.modules, action.payload];
     },
-    deleteModule: (state, action) => {
+    deleteModule: (state, action: PayloadAction<string>) => {
       state.modules = state.modules.filter(
-        (module: any) => module._id !== action.payload
+        (module) => module._id !== action.payload
       );
     },
-    updateModule: (state, action) => {
-      state.modules = state.modules.map((module: any) =>
+    updateModule: (state, action: PayloadAction<Module>) => {
+      state.modules = state.modules.map((module) =>
         module._id === action.payload._id ? action.payload : module
       );
     },
-    editModule: (state, action) => {
-      state.modules = state.modules.map((module: any) =>
+    editModule: (state, action: PayloadAction<string>) => {
+      state.modules = state.modules.map((module) =>
         module._id === action.payload ? { ...module, editing: true } : module
       );
     },
-    // NEW: Lesson actions
-    addLesson: (state, action) => {
+    addLesson: (state, action: PayloadAction<{ moduleId: string; lessonName: string }>) => {
       const { moduleId, lessonName } = action.payload;
-      state.modules = state.modules.map((module: any) => {
+      state.modules = state.modules.map((module) => {
         if (module._id === moduleId) {
           const newLesson = {
             _id: new Date().getTime().toString(),
@@ -54,9 +60,9 @@ const modulesSlice = createSlice({
         return module;
       });
     },
-    deleteLesson: (state, action) => {
+    deleteLesson: (state, action: PayloadAction<{ moduleId: string; lessonId: string }>) => {
       const { moduleId, lessonId } = action.payload;
-      state.modules = state.modules.map((module: any) => {
+      state.modules = state.modules.map((module) => {
         if (module._id === moduleId) {
           return {
             ...module,
@@ -66,9 +72,9 @@ const modulesSlice = createSlice({
         return module;
       });
     },
-    updateLesson: (state, action) => {
+    updateLesson: (state, action: PayloadAction<{ moduleId: string; lesson: any }>) => {
       const { moduleId, lesson } = action.payload;
-      state.modules = state.modules.map((module: any) => {
+      state.modules = state.modules.map((module) => {
         if (module._id === moduleId) {
           return {
             ...module,
@@ -80,9 +86,9 @@ const modulesSlice = createSlice({
         return module;
       });
     },
-    editLesson: (state, action) => {
+    editLesson: (state, action: PayloadAction<{ moduleId: string; lessonId: string }>) => {
       const { moduleId, lessonId } = action.payload;
-      state.modules = state.modules.map((module: any) => {
+      state.modules = state.modules.map((module) => {
         if (module._id === moduleId) {
           return {
             ...module,

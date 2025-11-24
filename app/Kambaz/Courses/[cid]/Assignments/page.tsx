@@ -9,7 +9,9 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button, ListGroup, Form } from "react-bootstrap";
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
+import * as assignmentsClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
   const params = useParams();
@@ -18,15 +20,38 @@ export default function Assignments() {
   const dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   
-  // Filter assignments for the current course
-  const courseAssignments = assignments.filter(
-    (assignment: any) => assignment.course === cid
-  );
+  // Check if user is faculty
+  const isFaculty = currentUser?.role === "FACULTY";
+  
+  // Filter assignments for the current course - WITH SAFETY CHECK
+  const courseAssignments = Array.isArray(assignments)
+    ? assignments.filter((assignment: any) => assignment.course === cid)
+    : [];
 
-  const handleDeleteAssignment = (assignmentId: string) => {
+  // Fetch assignments on component mount
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
+
+  const fetchAssignments = async () => {
+    try {
+      const fetchedAssignments = await assignmentsClient.fetchAssignmentsForCourse(cid);
+      dispatch(setAssignments(fetchedAssignments));
+    } catch (error) {
+      console.error("Error fetching assignments:", error);
+    }
+  };
+
+  const handleDeleteAssignment = async (assignmentId: string) => {
     if (window.confirm("Are you sure you want to delete this assignment?")) {
-      dispatch(deleteAssignment(assignmentId));
+      try {
+        await assignmentsClient.deleteAssignment(assignmentId);
+        dispatch(deleteAssignment(assignmentId));
+      } catch (error) {
+        console.error("Error deleting assignment:", error);
+      }
     }
   };
 
@@ -36,31 +61,33 @@ export default function Assignments() {
 
   return (
     <div id="wd-assignments" style={{ padding: "1rem" }}>
-      {/* Controls */}
-      <div className="mb-3">
-        <div className="input-group mb-3" style={{ maxWidth: "300px" }}>
-          <span className="input-group-text">
-            <FaMagnifyingGlass />
-          </span>
-          <Form.Control
-            id="wd-search-assignment"
-            placeholder="Search for Assignments"
-          />
+      {/* Controls - Only show to FACULTY */}
+      {isFaculty && (
+        <div className="mb-3">
+          <div className="input-group mb-3" style={{ maxWidth: "300px" }}>
+            <span className="input-group-text">
+              <FaMagnifyingGlass />
+            </span>
+            <Form.Control
+              id="wd-search-assignment"
+              placeholder="Search for Assignments"
+            />
+          </div>
+          <Button 
+            variant="danger" 
+            className="me-2 float-end" 
+            id="wd-add-assignment"
+            onClick={handleAddAssignment}
+          >
+            <BsPlus className="fs-4" />
+            Assignment
+          </Button>
+          <Button variant="secondary" className="me-2 float-end" id="wd-add-assignment-group">
+            <BsPlus className="fs-4" />
+            Group
+          </Button>
         </div>
-        <Button 
-          variant="danger" 
-          className="me-2 float-end" 
-          id="wd-add-assignment"
-          onClick={handleAddAssignment}
-        >
-          <BsPlus className="fs-4" />
-          Assignment
-        </Button>
-        <Button variant="secondary" className="me-2 float-end" id="wd-add-assignment-group">
-          <BsPlus className="fs-4" />
-          Group
-        </Button>
-      </div>
+      )}
 
       <br /><br />
 
@@ -69,7 +96,7 @@ export default function Assignments() {
         <h3 id="wd-assignments-title">
           <BsGripVertical className="me-2" />
           ASSIGNMENTS 40% of Total
-          <BsPlus className="float-end fs-3" />
+          {isFaculty && <BsPlus className="float-end fs-3" />}
         </h3>
       </div>
 
@@ -97,16 +124,19 @@ export default function Assignments() {
                   <strong>Due</strong> {assignment.dueDate} | {assignment.points} <strong>pts</strong>
                 </div>
               </div>
-              <div className="float-end">
-                <FaTrash
-                  className="text-danger me-3"
-                  onClick={() => handleDeleteAssignment(assignment._id)}
-                  style={{ cursor: "pointer" }}
-                  title="Delete Assignment"
-                />
-                <FaCheckCircle className="text-success me-2" />
-                <IoEllipsisVertical className="fs-4" />
-              </div>
+              {/* Only show delete to FACULTY */}
+              {isFaculty && (
+                <div className="float-end">
+                  <FaTrash
+                    className="text-danger me-3"
+                    onClick={() => handleDeleteAssignment(assignment._id)}
+                    style={{ cursor: "pointer" }}
+                    title="Delete Assignment"
+                  />
+                  <FaCheckCircle className="text-success me-2" />
+                  <IoEllipsisVertical className="fs-4" />
+                </div>
+              )}
             </div>
           </ListGroup.Item>
         ))}

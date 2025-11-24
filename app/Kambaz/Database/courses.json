@@ -1,52 +1,74 @@
 [
   {
-    "_id": "CS101",
-    "name": "Introduction to JavaScript",
-    "number": "CS1234",
+    "name": "Web Development",
+    "number": "CS5610",
     "startDate": "2024-01-10",
     "endDate": "2024-05-15",
-    "department": "CS",
+    "department": "Computer Science",
     "credits": 4,
-    "description": "Learn the basics of JavaScript programming language and modern web development."
+    "description": "Explores the design and implementation of web applications using modern frameworks like React and Next.js. Topics include client-side and server-side development, RESTful APIs, database integration with MongoDB, and deployment strategies."
   },
   {
-    "_id": "CS102",
-    "name": "React Fundamentals",
-    "number": "CS2345",
+    "name": "Algorithms",
+    "number": "CS5800",
     "startDate": "2024-01-10",
     "endDate": "2024-05-15",
-    "department": "CS",
+    "department": "Computer Science",
     "credits": 4,
-    "description": "Understand the core concepts of React framework and build dynamic user interfaces."
+    "description": "A comprehensive study of algorithm design and analysis. Topics include dynamic programming, greedy algorithms, graph algorithms, NP-completeness, and advanced data structures. Emphasis on problem-solving and computational complexity."
   },
   {
-    "_id": "CS103",
-    "name": "Next.js Deep Dive",
-    "number": "CS3456",
+    "name": "Database Management Systems",
+    "number": "CS5200",
     "startDate": "2024-01-10",
     "endDate": "2024-05-15",
-    "department": "CS",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "Covers the fundamentals of database systems including relational databases, SQL, normalization, transaction management, and NoSQL databases like MongoDB. Students will design and implement database applications."
+  },
+  {
+    "name": "Machine Learning",
+    "number": "CS6220",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "Introduction to machine learning algorithms and their applications. Topics include supervised and unsupervised learning, neural networks, decision trees, support vector machines, and deep learning fundamentals."
+  },
+  {
+    "name": "Software Engineering",
+    "number": "CS5500",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "Principles and practices of software engineering including software development lifecycle, agile methodologies, version control, testing strategies, design patterns, and team collaboration."
+  },
+  {
+    "name": "Computer Networks",
+    "number": "CS5700",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "Study of computer network architecture, protocols, and applications. Topics include TCP/IP, HTTP, DNS, routing algorithms, network security, and wireless networks."
+  },
+  {
+    "name": "Mobile Application Development",
+    "number": "CS5520",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "Computer Science",
+    "credits": 4,
+    "description": "Development of mobile applications for iOS and Android platforms. Covers mobile UI/UX design, native and cross-platform development, mobile databases, and integration with web services."
+  },
+  {
+    "name": "Cloud Computing",
+    "number": "CS6410",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-15",
+    "department": "Computer Science",
     "credits": 3,
-    "description": "Build powerful server-rendered React apps with Next.js framework."
-  },
-  {
-    "_id": "CS104",
-    "name": "Advanced Node.js",
-    "number": "CS4567",
-    "startDate": "2024-01-10",
-    "endDate": "2024-05-15",
-    "department": "CS",
-    "credits": 4,
-    "description": "Master backend development with Node.js and Express framework."
-  },
-  {
-    "_id": "CS105",
-    "name": "Full Stack Development",
-    "number": "CS5678",
-    "startDate": "2024-01-10",
-    "endDate": "2024-05-15",
-    "department": "CS",
-    "credits": 4,
-    "description": "Build complete web applications using modern full stack technologies."
+    "description": "Exploration of cloud computing architectures, services, and deployment models. Topics include virtualization, containerization with Docker, serverless computing, AWS, Azure, and Google Cloud Platform."
   }
 ]

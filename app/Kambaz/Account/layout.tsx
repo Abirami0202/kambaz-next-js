@@ -1,3 +1,7 @@
+"use client";
+
+import AccountSidebar from "./Sidebar";
+
 export default function AccountLayout({
   children,
 }: {
@@ -5,7 +9,10 @@ export default function AccountLayout({
 }) {
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <main style={{ flex: 1, padding: "1rem", overflowY: "auto" }}>{children}</main>
+      <AccountSidebar />
+      <main style={{ flex: 1, padding: "1rem", overflowY: "auto" }}>
+        {children}
+      </main>
     </div>
   );
 }

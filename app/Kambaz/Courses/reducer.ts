@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
-import { courses as initialCourses } from "../Database";
 
 const initialState = {
-  courses: initialCourses,
+  courses: [],
 };
 
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {
+    setCourses: (state, action) => {
+      state.courses = action.payload;
+    },
     addCourse: (state, action) => {
-      const newCourse = {
-        ...action.payload,
-        _id: new Date().getTime().toString(),
-      };
-      state.courses = [...state.courses, newCourse];
+      state.courses = [...state.courses, action.payload] as any;
     },
     deleteCourse: (state, action) => {
       state.courses = state.courses.filter((course: any) => course._id !== action.payload);
@@ -23,10 +21,10 @@ const coursesSlice = createSlice({
     updateCourse: (state, action) => {
       state.courses = state.courses.map((course: any) =>
         course._id === action.payload._id ? action.payload : course
-      );
+      ) as any;
     },
   },
 });
 
-export const { addCourse, deleteCourse, updateCourse } = coursesSlice.actions;
+export const { setCourses, addCourse, deleteCourse, updateCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;

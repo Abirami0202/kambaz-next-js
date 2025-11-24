@@ -1,17 +1,24 @@
-// app/Kambaz/Account/Sidebar.tsx
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 export default function AccountSidebar() {
   const pathname = usePathname();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
-  const links = [
-    { label: "Signin", href: "/Kambaz/Account/Signin", id: "wd-signin-link" },
-    { label: "Signup", href: "/Kambaz/Account/Signup", id: "wd-signup-link" },
-    { label: "Profile", href: "/Kambaz/Account/Profile", id: "wd-profile-link" },
-  ];
+  const links = currentUser 
+    ? currentUser.role === "ADMIN"
+      ? [
+          { label: "Profile", href: "/Kambaz/Account/Profile", id: "wd-profile-link" },
+          { label: "Users", href: "/Kambaz/Account/Users", id: "wd-users-link" },
+        ]
+      : [{ label: "Profile", href: "/Kambaz/Account/Profile", id: "wd-profile-link" }]
+    : [
+        { label: "Signin", href: "/Kambaz/Account/Signin", id: "wd-signin-link" },
+        { label: "Signup", href: "/Kambaz/Account/Signup", id: "wd-signup-link" },
+      ];
 
   return (
     <div 
@@ -24,7 +31,7 @@ export default function AccountSidebar() {
       }}
     >
       {links.map((link) => {
-        const isActive = pathname === link.href;
+        const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
         
         return (
           <Link
