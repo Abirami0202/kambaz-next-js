@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REMOTE_SERVER = process.env.NEXT_PUBLIC_REMOTE_SERVER || "http://localhost:4000";
+const REMOTE_SERVER = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 const ATTEMPTS_API = `${REMOTE_SERVER}/api`;
 
 export const findAttemptsForQuiz = async (quizId: string, userId: string) => {
