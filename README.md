@@ -38,3 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 "# Trigger redeployy" 
 "# Force fresh deployment" 
 "# Redeploy after backend session fix" 
+"# Deployed version" 
