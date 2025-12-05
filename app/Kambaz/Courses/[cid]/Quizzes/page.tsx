@@ -4,6 +4,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuizzes, addQuiz, deleteQuiz as deleteQuizAction, updateQuiz as updateQuizAction } from "./reducer";
 import * as quizzesClient from "./client";
+import * as questionsClient from "./Questions/client";
+import * as attemptsClient from "./Attempts/client";
 import { FaPlus, FaEllipsisV, FaCheckCircle } from "react-icons/fa";
 
 export default function QuizzesPage() {
@@ -13,9 +15,11 @@ export default function QuizzesPage() {
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [quizDetails, setQuizDetails] = useState<any>({});
   
   // Check if user is faculty
   const isFaculty = currentUser?.role === "FACULTY";
+  const isStudent = currentUser?.role === "STUDENT";
 
   useEffect(() => {
     if (cid) {
@@ -23,9 +27,41 @@ export default function QuizzesPage() {
     }
   }, [cid]);
 
+  useEffect(() => {
+    if (quizzes.length > 0) {
+      fetchQuizDetails();
+    }
+  }, [quizzes, currentUser]);
+
   const fetchQuizzes = async () => {
     const fetchedQuizzes = await quizzesClient.findQuizzesForCourse(cid as string);
     dispatch(setQuizzes(fetchedQuizzes));
+  };
+
+  const fetchQuizDetails = async () => {
+    const details: any = {};
+    
+    for (const quiz of quizzes) {
+      try {
+        // Fetch question count
+        const questions = await questionsClient.findQuestionsForQuiz(quiz._id);
+        details[quiz._id] = {
+          questionCount: questions.length,
+        };
+
+        // For students, fetch latest attempt
+        if (isStudent && currentUser) {
+          const latestAttempt = await attemptsClient.getLatestAttempt(quiz._id, currentUser._id);
+          if (latestAttempt) {
+            details[quiz._id].latestScore = latestAttempt.score;
+          }
+        }
+      } catch (error) {
+        console.error(`Error fetching details for quiz ${quiz._id}:`, error);
+      }
+    }
+    
+    setQuizDetails(details);
   };
 
   const handleAddQuiz = async () => {
@@ -59,6 +95,29 @@ export default function QuizzesPage() {
 
   const toggleMenu = (quizId: string) => {
     setOpenMenuId(openMenuId === quizId ? null : quizId);
+  };
+
+  const getAvailabilityStatus = (quiz: any) => {
+    const now = new Date();
+    const availableDate = quiz.availableDate ? new Date(quiz.availableDate) : null;
+    const untilDate = quiz.untilDate ? new Date(quiz.untilDate) : null;
+
+    if (!availableDate) {
+      return { status: "Available", color: "#28a745" };
+    }
+
+    if (now < availableDate) {
+      return {
+        status: `Not available until ${availableDate.toLocaleDateString()}`,
+        color: "#dc3545",
+      };
+    }
+
+    if (untilDate && now > untilDate) {
+      return { status: "Closed", color: "#6c757d" };
+    }
+
+    return { status: "Available", color: "#28a745" };
   };
 
   return (
@@ -126,11 +185,42 @@ export default function QuizzesPage() {
                   >
                     {quiz.title}
                   </h3>
-                  <p style={{ margin: "0.5rem 0 0 0", fontSize: "0.9rem", color: "#666" }}>
-                    {quiz.availableDate && `Available: ${new Date(quiz.availableDate).toLocaleDateString()}`}
-                    {quiz.dueDate && ` | Due: ${new Date(quiz.dueDate).toLocaleDateString()}`}
-                    {quiz.points !== undefined && ` | ${quiz.points} pts`}
-                  </p>
+                  
+                  {/* Additional Quiz Info */}
+                  <div style={{ marginTop: "0.5rem", fontSize: "0.9rem", color: "#666" }}>
+                    {/* Availability Status */}
+                    <div style={{ marginBottom: "0.25rem" }}>
+                      <strong style={{ color: getAvailabilityStatus(quiz).color }}>
+                        {getAvailabilityStatus(quiz).status}
+                      </strong>
+                    </div>
+                    
+                    {/* Due Date */}
+                    {quiz.dueDate && (
+                      <div style={{ marginBottom: "0.25rem" }}>
+                        <strong>Due:</strong> {new Date(quiz.dueDate).toLocaleDateString()} at {new Date(quiz.dueDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </div>
+                    )}
+                    
+                    {/* Points */}
+                    <div style={{ marginBottom: "0.25rem" }}>
+                      <strong>Points:</strong> {quiz.points || 0}
+                    </div>
+                    
+                    {/* Number of Questions */}
+                    {quizDetails[quiz._id] && (
+                      <div style={{ marginBottom: "0.25rem" }}>
+                        <strong>Questions:</strong> {quizDetails[quiz._id].questionCount || 0}
+                      </div>
+                    )}
+                    
+                    {/* Student Score */}
+                    {isStudent && quizDetails[quiz._id]?.latestScore !== undefined && (
+                      <div style={{ marginBottom: "0.25rem" }}>
+                        <strong>Your Score:</strong> {quizDetails[quiz._id].latestScore} / {quiz.points}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 

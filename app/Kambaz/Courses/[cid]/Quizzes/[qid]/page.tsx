@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import * as quizzesClient from "../client";
+import * as questionsClient from "../Questions/client";
+import * as attemptsClient from "../Attempts/client";
 import { updateQuiz as updateQuizAction } from "../reducer";
 import { FaCheckCircle, FaBan } from "react-icons/fa";
 
@@ -13,9 +15,13 @@ export default function QuizDetailsPage() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [quiz, setQuiz] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [latestAttempt, setLatestAttempt] = useState<any>(null);
+  const [attemptCount, setAttemptCount] = useState(0);
   
   // Check if user is faculty
   const isFaculty = currentUser?.role === "FACULTY";
+  const isStudent = currentUser?.role === "STUDENT";
 
   useEffect(() => {
     if (qid) {
@@ -27,6 +33,19 @@ export default function QuizDetailsPage() {
     try {
       const fetchedQuiz = await quizzesClient.findQuizById(qid as string);
       setQuiz(fetchedQuiz);
+      
+      // Fetch question count
+      const questions = await questionsClient.findQuestionsForQuiz(qid as string);
+      setQuestionCount(questions.length);
+      
+      // For students, fetch latest attempt
+      if (isStudent && currentUser) {
+        const latest = await attemptsClient.getLatestAttempt(qid as string, currentUser._id);
+        setLatestAttempt(latest);
+        
+        const countData = await attemptsClient.getAttemptCount(qid as string, currentUser._id);
+        setAttemptCount(countData.count);
+      }
     } catch (error) {
       console.error("Error fetching quiz:", error);
     } finally {
@@ -50,6 +69,16 @@ export default function QuizDetailsPage() {
     router.push(`/Kambaz/Courses/${cid}/Quizzes/${qid}/preview`);
   };
 
+  const handleTakeQuiz = () => {
+  router.push(`/Kambaz/Courses/${cid}/Quizzes/${qid}/take`);
+};
+
+const handleViewAttempt = () => {
+  if (latestAttempt) {
+    router.push(`/Kambaz/Courses/${cid}/Quizzes/${qid}/attempts/${latestAttempt._id}`);
+  }
+};
+
   if (loading) {
     return <div style={{ padding: "2rem" }}>Loading...</div>;
   }
@@ -63,7 +92,8 @@ export default function QuizDetailsPage() {
       {/* Header with Title and Buttons */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <h1 style={{ margin: 0 }}>{quiz.title}</h1>
-        {/* Only show control buttons to FACULTY */}
+        
+        {/* Faculty Buttons */}
         {isFaculty && (
           <div style={{ display: "flex", gap: "1rem" }}>
             <button
@@ -118,7 +148,58 @@ export default function QuizDetailsPage() {
             </button>
           </div>
         )}
+        
+        {/* Student Buttons */}
+        {isStudent && (
+          <div style={{ display: "flex", gap: "1rem" }}>
+            {quiz.published && (
+              <button
+                onClick={handleTakeQuiz}
+                disabled={quiz.multipleAttempts === false && attemptCount >= 1}
+                style={{
+                  padding: "0.5rem 1.5rem",
+                  backgroundColor: quiz.multipleAttempts === false && attemptCount >= 1 ? "#6c757d" : "#28a745",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: quiz.multipleAttempts === false && attemptCount >= 1 ? "not-allowed" : "pointer",
+                  opacity: quiz.multipleAttempts === false && attemptCount >= 1 ? 0.6 : 1,
+                }}
+              >
+                {attemptCount > 0 ? "Retake Quiz" : "Take Quiz"}
+              </button>
+            )}
+            {latestAttempt && (
+              <button
+                onClick={handleViewAttempt}
+                style={{
+                  padding: "0.5rem 1.5rem",
+                  backgroundColor: "#007bff",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                View Last Attempt
+              </button>
+            )}
+          </div>
+        )}
       </div>
+      
+      {/* Student Score Display */}
+      {isStudent && latestAttempt && (
+        <div style={{ marginBottom: "2rem", padding: "1rem", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
+          <h3 style={{ margin: "0 0 0.5rem 0" }}>Your Latest Score</h3>
+          <p style={{ margin: 0, fontSize: "1.5rem", fontWeight: "bold", color: "#007bff" }}>
+            {latestAttempt.score} / {quiz.points} pts ({Math.round((latestAttempt.score / quiz.points) * 100)}%)
+          </p>
+          <p style={{ margin: "0.5rem 0 0 0", color: "#666" }}>
+            Attempt {latestAttempt.attemptNumber} | Submitted: {new Date(latestAttempt.submittedAt).toLocaleString()}
+          </p>
+        </div>
+      )}
 
       {/* Quiz Summary */}
       <div
