@@ -4,7 +4,7 @@
     "title": "HTML & CSS Fundamentals",
     "description": "Create a responsive webpage using HTML5 and CSS3",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd61",
+    "course": "6924c9a4131eae713234c04f",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -14,7 +14,7 @@
     "title": "React Component Design",
     "description": "Build reusable React components with props and state",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd61",
+    "course": "6924c9a4131eae713234c04f",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -24,7 +24,7 @@
     "title": "Next.js Full Stack App",
     "description": "Create a full stack application with Next.js and MongoDB",
     "points": 150,
-    "course": "6923149c7f5f5222ddbcbd61",
+    "course": "6924c9a4131eae713234c04f",
     "availableFrom": "2024-03-01",
     "availableUntil": "2024-04-15",
     "dueDate": "2024-04-10"
@@ -34,7 +34,7 @@
     "title": "Algorithm Analysis",
     "description": "Analyze time and space complexity of algorithms",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd62",
+    "course": "6924c9a4131eae713234c050",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -44,7 +44,7 @@
     "title": "Dynamic Programming Problems",
     "description": "Solve classic DP problems using memoization and tabulation",
     "points": 120,
-    "course": "6923149c7f5f5222ddbcbd62",
+    "course": "6924c9a4131eae713234c050",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -54,7 +54,7 @@
     "title": "Graph Algorithms Implementation",
     "description": "Implement BFS, DFS, and Dijkstra's algorithm",
     "points": 130,
-    "course": "6923149c7f5f5222ddbcbd62",
+    "course": "6924c9a4131eae713234c050",
     "availableFrom": "2024-03-01",
     "availableUntil": "2024-04-01",
     "dueDate": "2024-03-25"
@@ -64,7 +64,7 @@
     "title": "Database Design Project",
     "description": "Design and normalize a database schema",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd63",
+    "course": "6924c9a4131eae713234c051",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -74,7 +74,7 @@
     "title": "SQL Query Exercises",
     "description": "Write complex SQL queries with joins and aggregations",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd63",
+    "course": "6924c9a4131eae713234c051",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -84,7 +84,7 @@
     "title": "MongoDB Application",
     "description": "Build a CRUD application using MongoDB",
     "points": 120,
-    "course": "6923149c7f5f5222ddbcbd63",
+    "course": "6924c9a4131eae713234c051",
     "availableFrom": "2024-03-01",
     "availableUntil": "2024-04-01",
     "dueDate": "2024-03-25"
@@ -94,7 +94,7 @@
     "title": "Linear Regression Model",
     "description": "Implement linear regression from scratch",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd64",
+    "course": "6924c9a4131eae713234c052",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -104,7 +104,7 @@
     "title": "Neural Network Training",
     "description": "Train a neural network using backpropagation",
     "points": 130,
-    "course": "6923149c7f5f5222ddbcbd64",
+    "course": "6924c9a4131eae713234c052",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -114,7 +114,7 @@
     "title": "Clustering Analysis",
     "description": "Implement K-means clustering algorithm",
     "points": 110,
-    "course": "6923149c7f5f5222ddbcbd64",
+    "course": "6924c9a4131eae713234c052",
     "availableFrom": "2024-03-01",
     "availableUntil": "2024-04-01",
     "dueDate": "2024-03-25"
@@ -124,7 +124,7 @@
     "title": "Agile Project Planning",
     "description": "Create user stories and sprint planning documents",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd65",
+    "course": "6924c9a4131eae713234c053",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -134,7 +134,7 @@
     "title": "Design Patterns Implementation",
     "description": "Implement common design patterns in a project",
     "points": 120,
-    "course": "6923149c7f5f5222ddbcbd65",
+    "course": "6924c9a4131eae713234c053",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -144,7 +144,7 @@
     "title": "Testing Strategy Document",
     "description": "Write comprehensive test plans and test cases",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd65",
+    "course": "6924c9a4131eae713234c053",
     "availableFrom": "2024-03-01",
     "availableUntil": "2024-04-01",
     "dueDate": "2024-03-25"
@@ -154,7 +154,7 @@
     "title": "Network Protocol Analysis",
     "description": "Analyze TCP/IP packet captures",
     "points": 100,
-    "course": "6923149c7f5f5222ddbcbd66",
+    "course": "6924c9a4131eae713234c054",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-02-15",
     "dueDate": "2024-02-10"
@@ -164,7 +164,7 @@
     "title": "Socket Programming",
     "description": "Create client-server applications using sockets",
     "points": 120,
-    "course": "6923149c7f5f5222ddbcbd66",
+    "course": "6924c9a4131eae713234c054",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-01",
     "dueDate": "2024-02-25"
@@ -174,7 +174,7 @@
     "title": "iOS App Development",
     "description": "Build a native iOS app using Swift and UIKit",
     "points": 150,
-    "course": "6923149c7f5f5222ddbcbd67",
+    "course": "6924c9a4131eae713234c055",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-03-15",
     "dueDate": "2024-03-10"
@@ -184,7 +184,7 @@
     "title": "Android App Development",
     "description": "Build a native Android app using Kotlin",
     "points": 150,
-    "course": "6923149c7f5f5222ddbcbd67",
+    "course": "6924c9a4131eae713234c055",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-04-01",
     "dueDate": "2024-03-25"
@@ -194,7 +194,7 @@
     "title": "AWS Deployment Project",
     "description": "Deploy a web application on AWS using EC2 and S3",
     "points": 130,
-    "course": "6923149c7f5f5222ddbcbd68",
+    "course": "6924c9a4131eae713234c056",
     "availableFrom": "2024-01-15",
     "availableUntil": "2024-03-15",
     "dueDate": "2024-03-10"
@@ -204,7 +204,7 @@
     "title": "Serverless Functions",
     "description": "Create serverless functions using AWS Lambda",
     "points": 110,
-    "course": "6923149c7f5f5222ddbcbd68",
+    "course": "6924c9a4131eae713234c056",
     "availableFrom": "2024-02-01",
     "availableUntil": "2024-03-25",
     "dueDate": "2024-03-20"
