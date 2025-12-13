@@ -15,13 +15,13 @@ export default function Lab2() {
         {/* Text fields */}
         <h5>Text Fields</h5>
         <label htmlFor="wd-text-fields-username">Username</label>
-        <input placeholder="Abirami" id="wd-text-fields-username" /><br />
+        <input placeholder="Mrunal" id="wd-text-fields-username" /><br />
         <label htmlFor="wd-text-fields-password">Password</label>
         <input type="password" defaultValue="123asd" id="wd-text-fields-password" /><br />
         <label htmlFor="wd-text-fields-first-name">First Name</label>
-        <input type="text" title="Abirami" id="wd-text-fields-first-name" /><br />
+        <input type="text" title="Mrunal" id="wd-text-fields-first-name" /><br />
         <label htmlFor="wd-text-fields-last-name">Last Name</label>
-        <input type="text" placeholder="Thiru" defaultValue="Thiru" title="The last name" id="wd-text-fields-last-name" /><br />
+        <input type="text" placeholder="G" defaultValue="G" title="The last name" id="wd-text-fields-last-name" /><br />
 
         {/* Textarea */}
         <h5>Text boxes</h5>

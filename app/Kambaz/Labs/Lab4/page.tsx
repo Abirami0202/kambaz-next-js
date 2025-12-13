@@ -80,7 +80,7 @@ export default function Lab4() {
         <Nav variant="pills">
           <NavItem>
             <NavLink 
-              href="https://github.com/Abirami0202/kambaz-next-js" 
+              href="https://github.com/mrunalg25/kambaz-next-js" 
               target="_blank"
               rel="noopener noreferrer"
             >

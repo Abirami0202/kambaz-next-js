@@ -6,7 +6,7 @@ export default function LabsPage() {
       <h1>Labs</h1>
       
       {/* Your full name and section - as required by assignment */}
-      <h3>Name: ABIRAMI</h3>
+      <h3>Name: Mrunal</h3>
       <h3>Section: WD</h3>
       
       <ul>
@@ -59,7 +59,7 @@ export default function LabsPage() {
         <li>
           <a 
             id="wd-github" 
-            href="https://github.com/Abirami0202/kambaz-next-js" 
+            href="https://github.com/mrunalg25/kambaz-next-js" 
             target="_blank" 
             rel="noopener noreferrer"
           >
@@ -69,7 +69,7 @@ export default function LabsPage() {
         <li>
           <a 
             id="wd-github-node" 
-            href="https://github.com/Abirami0202/kambaz-node-server-app" 
+            href="https://github.com/mrunalg25/kambaz-node-server-app" 
             target="_blank" 
             rel="noopener noreferrer"
           >

@@ -8,12 +8,12 @@ export default function Lab1() {
       <h3>HTML Examples</h3>
 
       {/* Your full name and section */}
-      <h4>Name: ABIRAMI</h4>
+      <h4>Name: Mrunal</h4>
       <h4>Section: WD</h4>
       {/* Links */}
       <p>
         <Link href="/Labs">All Labs</Link> | <Link href="/Kambaz">Kambaz App</Link> |{" "}
-        <a id="wd-github" href="https://github.com/Abirami0202/kambaz-next-js.git" target="_blank">Source Code (GitHub)</a>
+        <a id="wd-github" href="https://github.com/mrunalg25/kambaz-next-js.git" target="_blank">Source Code (GitHub)</a>
       </p>
 
       {/* Heading Tags */}
